@@ -1,14 +1,14 @@
 import { Container } from '@/components/ui/container';
 import { PropsWithChildren } from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { ThemedImage } from '../themed-image';
 import { ThemedText } from '../themed-text';
 import { ThemedButton } from './themed-button';
 
 export function ImageBoxInput({ children }: PropsWithChildren) {
     return (
         <Container>
-            <Image source={require('@/assets/images/partial-react-logo.png')} />
-
+            <ThemedImage></ThemedImage>
             <ThemedButton color='red'>
                 <ThemedText>Remove</ThemedText>
             </ThemedButton>
