@@ -2,40 +2,28 @@ import { ThemedImage } from '@/components/themed-image';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Header } from '@/components/ui/header';
-import { ImageBoxInput } from '@/components/ui/image-box-input';
 import { ThemedButton } from '@/components/ui/themed-button';
-import { ScrollView, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-export default function InputScreen() {
+export default function HomeScreen() {
     return (
-        <ThemedView color='background'>
-            <Header title='Input'></Header>
-            
-            <ScrollView>
-                <ImageBoxInput>
-                    <ThemedImage/>
-                </ImageBoxInput>
-                <ImageBoxInput>
-                    <ThemedImage/>
-                </ImageBoxInput>
-            </ScrollView>
+        <ThemedView color='background' style={{gap: 20}}>
+            <Header title='Home'></Header>
 
-            {/* Button menu */}
+            <ThemedImage/>
+
             <ThemedView color='accent' style={styles.buttonMenu}>
                 <ThemedView color='accent'>
                     <ThemedButton>
-                        <ThemedText>Paste from Keyboard</ThemedText>
+                        <ThemedText>Generate ID</ThemedText>
                     </ThemedButton>
                     <ThemedButton>
-                        <ThemedText>Open Files</ThemedText>
+                        <ThemedText>View History</ThemedText>
                     </ThemedButton>
                     <ThemedButton>
-                        <ThemedText>Gallary</ThemedText>
+                        <ThemedText>Credits</ThemedText>
                     </ThemedButton>
                 </ThemedView>
-                <ThemedButton>
-                    <ThemedText>Continue</ThemedText>
-                </ThemedButton>
             </ThemedView>
 
         </ThemedView>
@@ -51,8 +39,5 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       outlineWidth: 2,
       outlineColor: '#000',
-      position: 'absolute',
-      bottom: 60, // TODO this is bad lmao
-      width: '100%'
     },
   });

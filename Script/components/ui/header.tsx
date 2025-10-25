@@ -4,17 +4,20 @@ import { ThemedButton } from '@/components/ui/themed-button';
 import { PropsWithChildren } from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { IconSymbol } from './icon-symbol';
 
 export type HeaderProps = {
     title?: string
 };
 
 export function Header({ title, children }: PropsWithChildren & HeaderProps) {
+    const iconName = title === "Home" ? "house.fill" : "paperplane.fill";
+
     return (
         <SafeAreaView>
             <ThemedView color='accent' style={styles.default}>
                 <ThemedButton>
-                    <ThemedText>Back</ThemedText>
+                    <IconSymbol size={28} name={iconName} color={'#000'} />,
                 </ThemedButton> 
                 <ThemedText type="title">{title}</ThemedText>
             </ThemedView>
