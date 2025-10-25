@@ -6,15 +6,17 @@
 /> */}
 
 import { ThemedView } from '@/components/themed-view';
-import { ThemedText } from '@/components/themed-text';
+import { PropsWithChildren } from 'react';
 import { StyleSheet } from 'react-native';
 
-export function Button() {
+export type ThemedButtonProps = {
+    color?: 'button' | 'red' | 'green'
+};
 
-
+export function ThemedButton({ color = 'button', children }: PropsWithChildren & ThemedButtonProps) {
     return (
-        <ThemedView color='buttonBackground' style={styles.default}>
-            <ThemedText type='emphasis'>{"BBB"}</ThemedText>
+        <ThemedView color={color} style={styles.default}>
+            {children}
         </ThemedView>
     );
 }
@@ -29,6 +31,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignContent: 'center',
         justifyContent: 'center',
-
     },
 });

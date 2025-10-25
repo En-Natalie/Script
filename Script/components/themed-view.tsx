@@ -1,17 +1,14 @@
 import { View, type ViewProps } from 'react-native';
-import { StyleSheet, Text, type TextProps } from 'react-native';
 
 import { useThemeColor } from '@/hooks/use-theme-color';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export type ThemedViewProps = ViewProps & {
-  color: 'accent' | 'background' | 'buttonBackground' | 'containerBackground'
+  color?: 'accent' | 'background' | 'button' | 'container' | 'red' | 'green'
 };
 
-export function ThemedView({ color, style, ...otherProps }: ThemedViewProps) {
+export function ThemedView({ color = 'background', style, ...otherProps }: ThemedViewProps) {
   const backgroundColor = useThemeColor(color);
   
-
   return (
     <View
       style={[
@@ -26,23 +23,3 @@ export function ThemedView({ color, style, ...otherProps }: ThemedViewProps) {
     />
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-    
-//   },
-//   background: {
-//     backgroundColor: 'accent',
-//     padding: 100,
-//   },
-//   accent: {
-//     backgroundColor: 'accent',
-//     padding: 20,
-//     margin: 10,
-//   },
-//   button: {
-//     backgroundColor: 'buttonBackground',
-//     padding: 20,
-//     margin: 10,
-//   }
-// });

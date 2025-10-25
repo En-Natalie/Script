@@ -11,10 +11,12 @@ const tintColorDark = '#fff';
 export const Colors = {
   default: {
     text: '#000',
-    accent: '#4433aa',
     background: '#726fdf',
-    buttonBackground: '#bcbafb',
-    containerBackground: '#fff',
+    accent: '#4433aa',
+    container: '#fff',
+    button: '#bcbafb',
+    red: '#f3b4b4',
+    green: '#96bed6',
 
     tint: tintColorLight,
     icon: '#687076',
