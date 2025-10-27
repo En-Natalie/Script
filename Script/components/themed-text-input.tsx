@@ -1,20 +1,22 @@
+import { Colors } from '@/constants/theme';
 import { StyleSheet, TextInput, type TextInputProps } from 'react-native';
 
 import { useThemeColor } from '@/hooks/use-theme-color';
-import { Container } from './ui/container';
 
 export type ThemedTextInputProps = TextInputProps & {
-    text: string,
+    placeholder: string,
     type?: 'default' | 'emphasis' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
 };
 
-export function ThemedTextInput({ style, children }: ThemedTextInputProps) {
+export function ThemedTextInput({ placeholder, style, children }: ThemedTextInputProps) {
   const color = useThemeColor('text');
 
     return(
-        <Container>
-            <TextInput></TextInput>
-        </Container>
+        <TextInput 
+            placeholder={placeholder}
+            placeholderTextColor={Colors.default.background}
+            style={[styles.default, style]}>
+        </TextInput>
     )
 }
 
@@ -22,10 +24,18 @@ const styles = StyleSheet.create({
   default: {
     fontSize: 16,
     lineHeight: 24,
-    width: 200,
     //keyboardType: email-address
     // max length
     // max lines
-    // on submit editing
+    // on submit editing TODO
+    padding: 5,
+    borderRadius: 10,
+    outlineColor: '#000',
+    outlineWidth: 2,
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    flex: 1,
   },
 });
