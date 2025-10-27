@@ -8,51 +8,65 @@ import { ScrollView, StyleSheet } from 'react-native';
 
 export default function InputScreen() {
     return (
-        <ThemedView color='background'>
+        <ScrollView stickyHeaderIndices={[0]}>
             <Header title='Input'></Header>
+            <ThemedView color='background'>
             
-            <ScrollView>
+                {/* images */}
                 <ImageBoxInput>
-                    <ThemedImage/>
+                       <ThemedImage/>
                 </ImageBoxInput>
                 <ImageBoxInput>
                     <ThemedImage/>
                 </ImageBoxInput>
-            </ScrollView>
+
+            </ThemedView>
 
             {/* Button menu */}
             <ThemedView color='accent' style={styles.buttonMenu}>
-                <ThemedView color='accent'>
-                    <ThemedButton>
-                        <ThemedText>Paste from Keyboard</ThemedText>
-                    </ThemedButton>
-                    <ThemedButton>
-                        <ThemedText>Open Files</ThemedText>
-                    </ThemedButton>
-                    <ThemedButton>
-                        <ThemedText>Gallary</ThemedText>
-                    </ThemedButton>
-                </ThemedView>
+
+            <ThemedView color='accent' style={styles.verticalButtonMenu}>
+                <ThemedButton>
+                    <ThemedText>Paste from Keyboard</ThemedText>
+                </ThemedButton>
+                <ThemedButton>
+                    <ThemedText>Open Files</ThemedText>
+                </ThemedButton>
+                <ThemedButton>
+                    <ThemedText>Gallery</ThemedText>
+                </ThemedButton>
+            </ThemedView>
+
+            <ThemedView color='accent'>
                 <ThemedButton>
                     <ThemedText>Continue</ThemedText>
                 </ThemedButton>
             </ThemedView>
 
-        </ThemedView>
-      );
+            </ThemedView>
+        </ScrollView>
+    )
 }
 
 const styles = StyleSheet.create({
     buttonMenu: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: 10,
-      alignContent: 'center',
-      justifyContent: 'center',
-      outlineWidth: 2,
-      outlineColor: '#000',
-      position: 'absolute',
-      bottom: 60, // TODO this is bad lmao
-      width: '100%'
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
+        alignContent: 'center',
+        justifyContent: 'center',
+        outlineWidth: 2,
+        outlineColor: '#000',
+        padding: 10,
+        // position: 'absolute',
+        // bottom: 60, // TODO this is bad lmao
+        // width: '100%'
     },
-  });
+    verticalButtonMenu: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 10,
+        alignContent: 'center',
+        justifyContent: 'center',
+    }
+});

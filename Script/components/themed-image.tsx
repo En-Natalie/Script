@@ -1,20 +1,21 @@
-import { Image } from 'react-native';
+import { Image, ImageProps } from 'react-native';
 
 export type ThemedImageProps = {
-  url: string;
+  url?: string;
 };
 
-export function ThemedImage() {
+export function ThemedImage({url = '@/assets/images/favicon.png', style}: ThemedImageProps & ImageProps) {
     return (
         <Image
-        style={{
+        style={[{
             borderWidth: 2,
             borderColor: '#000',
             borderRadius: 10,
+            flex: 1,
+            resizeMode: 'cover',
             width: '100%',
-            height: 200, // TODO this is bad lmao
-        }}
-        source={require('@/assets/images/favicon.png')}
+        }, style]}
+        source={require('@/assets/images/favicon.png')} // TODO 
         />
     );
 }

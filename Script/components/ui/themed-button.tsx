@@ -6,16 +6,20 @@
 /> */}
 
 import { ThemedView } from '@/components/themed-view';
-import { PropsWithChildren } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ViewProps } from 'react-native';
 
 export type ThemedButtonProps = {
-    color?: 'button' | 'red' | 'green'
+    color?: 'button' | 'red' | 'green',
+    square?: boolean
 };
 
-export function ThemedButton({ color = 'button', children }: PropsWithChildren & ThemedButtonProps) {
+export function ThemedButton({ color = 'button', square = false, style = styles.default, children }: ViewProps & ThemedButtonProps) {
+    if (square) {
+        style = styles.square
+    }
+    
     return (
-        <ThemedView color={color} style={styles.default}>
+        <ThemedView color={color} style={style}>
             {children}
         </ThemedView>
     );
@@ -23,7 +27,6 @@ export function ThemedButton({ color = 'button', children }: PropsWithChildren &
 
 const styles = StyleSheet.create({
     default: {
-        margin: 10,
         padding: 5,
         borderRadius: 10,
         outlineColor: '#000',
@@ -31,5 +34,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignContent: 'center',
         justifyContent: 'center',
+        width: '100%',
+        flex: 1,
     },
+    square: {
+        padding: 5,
+        borderRadius: 10,
+        outlineColor: '#000',
+        outlineWidth: 2,
+        alignItems: 'center',
+        alignContent: 'center',
+        justifyContent: 'center',
+        width: 10,
+        flex: 1,
+    }
 });

@@ -1,19 +1,22 @@
 import { ThemedImage } from '@/components/themed-image';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
+import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
 import { ThemedButton } from '@/components/ui/themed-button';
-import { StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 export default function HomeScreen() {
     return (
-        <ThemedView color='background' style={{gap: 20}}>
+        <ScrollView stickyHeaderIndices={[0]}>
             <Header title='Home'></Header>
+            <ThemedView color='background'>
+            
+                <Container>
+                    <ThemedImage style={styles.logoImage}/> 
+                </Container>
 
-            <ThemedImage/>
-
-            <ThemedView color='accent' style={styles.buttonMenu}>
-                <ThemedView color='accent'>
+                <Container>
                     <ThemedButton>
                         <ThemedText>Generate ID</ThemedText>
                     </ThemedButton>
@@ -23,21 +26,16 @@ export default function HomeScreen() {
                     <ThemedButton>
                         <ThemedText>Credits</ThemedText>
                     </ThemedButton>
-                </ThemedView>
+                </Container>
+                
             </ThemedView>
-
-        </ThemedView>
-      );
+        </ScrollView>
+    );
 }
 
 const styles = StyleSheet.create({
-    buttonMenu: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: 10,
-      alignContent: 'center',
-      justifyContent: 'center',
-      outlineWidth: 2,
-      outlineColor: '#000',
+    logoImage: { // TODO actually do the thing
+        width: '100%',
+        height: 200,
     },
-  });
+});

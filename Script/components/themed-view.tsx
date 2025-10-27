@@ -11,14 +11,16 @@ export function ThemedView({ color = 'background', style, children }: ThemedView
   
   return (
     <View
-      style={[
-        { backgroundColor },
+      style={[{ 
+        backgroundColor,
+        flex: 1,
+        },
         style,
       ]}> 
       { children }
     </View>
   );
-} 
+}
 
 // backgroundColor === 'containerBackground' ? styles.container : undefined,
 // backgroundColor === 'buttonBackground' ? styles.button : undefined,
