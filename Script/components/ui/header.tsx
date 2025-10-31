@@ -1,6 +1,7 @@
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { ThemedButton } from '@/components/ui/themed-button';
+import { Colors, Constants } from '@/constants/theme';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context';
 import { IconSymbol } from './icon-symbol';
@@ -33,9 +34,9 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         gap: 10,
         alignContent: 'center',
-        borderBottomWidth: 2,
+        borderBottomWidth: Constants.default.outlineWidth,
         padding: 10,
-        borderColor: '#000',
+        borderColor: Colors.default.border,
         minHeight: 60,
         height: 60,
         maxHeight: 60,

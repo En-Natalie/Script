@@ -6,6 +6,7 @@
 /> */}
 
 import { ThemedView } from '@/components/themed-view';
+import { Colors, Constants } from '@/constants/theme';
 import { StyleSheet, ViewProps } from 'react-native';
 
 export type ThemedButtonProps = {
@@ -28,9 +29,9 @@ export function ThemedButton({ color = 'button', square = false, style = styles.
 const styles = StyleSheet.create({
     default: {
         padding: 5,
-        borderRadius: 10,
-        outlineColor: '#000',
-        outlineWidth: 2,
+        borderRadius: Constants.default.borderRadius,
+        outlineColor: Colors.default.border,
+        outlineWidth: Constants.default.outlineWidth,
         alignItems: 'center',
         alignContent: 'center',
         justifyContent: 'center',
@@ -39,13 +40,13 @@ const styles = StyleSheet.create({
     },
     square: {
         padding: 5,
-        borderRadius: 10,
-        outlineColor: '#000',
-        outlineWidth: 2,
+        borderRadius: Constants.default.borderRadius,
+        outlineColor: Colors.default.border,
+        outlineWidth: Constants.default.outlineWidth,
         alignItems: 'center',
         alignContent: 'center',
         justifyContent: 'center',
-        width: 10,
+        width: 40,
         flex: 1,
     }
 });

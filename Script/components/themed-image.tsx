@@ -1,3 +1,4 @@
+import { Colors, Constants } from '@/constants/theme';
 import { Image, ImageProps } from 'react-native';
 
 export type ThemedImageProps = {
@@ -8,9 +9,9 @@ export function ThemedImage({url = '@/assets/images/favicon.png', style}: Themed
     return (
         <Image
         style={[{
-            borderWidth: 2,
-            borderColor: '#000',
-            borderRadius: 10,
+            borderWidth: Constants.default.outlineWidth,
+            borderColor: Colors.default.border,
+            borderRadius: Constants.default.borderRadius,
             flex: 1,
             resizeMode: 'cover',
             width: '100%',

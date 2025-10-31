@@ -1,4 +1,4 @@
-import { Colors } from '@/constants/theme';
+import { Colors, Constants } from '@/constants/theme';
 import { StyleSheet, TextInput, type TextInputProps } from 'react-native';
 
 import { useThemeColor } from '@/hooks/use-theme-color';
@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
     // max lines
     // on submit editing TODO
     padding: 5,
-    borderRadius: 10,
-    outlineColor: '#000',
-    outlineWidth: 2,
+    borderRadius: Constants.default.borderRadius,
+    outlineColor: Colors.default.border,
+    outlineWidth: Constants.default.outlineWidth,
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',

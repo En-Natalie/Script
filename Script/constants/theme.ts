@@ -16,7 +16,8 @@ export const Colors = {
     container: '#fff',
     button: '#bcbafb',
     red: '#f3b4b4',
-    green: '#96bed6',
+    green: '#96e6be',
+    border: '#000',
 
     tint: tintColorLight,
     icon: '#687076',
@@ -24,6 +25,13 @@ export const Colors = {
     tabIconSelected: tintColorLight,
   }
 };
+
+export const Constants = {
+  default: {
+    borderRadius: 5,
+    outlineWidth: 1.5,
+  }
+}
 
 export const Fonts = Platform.select({
   ios: {

@@ -1,4 +1,5 @@
 import { ThemedView, ThemedViewProps } from '@/components/themed-view';
+import { Colors, Constants } from '@/constants/theme';
 import { StyleSheet } from 'react-native';
 
 export type ContainerProps = {
@@ -29,9 +30,9 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         padding: 15,
         margin: 10,
-        borderRadius: 10,
-        outlineColor: '#000',
-        outlineWidth: 2,
+        borderRadius: Constants.default.borderRadius,
+        outlineColor: Colors.default.border,
+        outlineWidth: Constants.default.outlineWidth,
         flex: 1,
         gap: 15,
     },
