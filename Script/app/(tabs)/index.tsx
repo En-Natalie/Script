@@ -7,6 +7,7 @@ import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
 import { ThemedButton } from '@/components/ui/themed-button';
 import { ScrollView } from 'react-native';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 
 export default function LoginScreen() {
     return (
@@ -20,6 +21,7 @@ export default function LoginScreen() {
 
                     <ThemedButton>
                         <ThemedText>Log In</ThemedText>
+                        <IconSymbol name='arrow.right'></IconSymbol>
                     </ThemedButton>
                 </Container>
 
@@ -29,6 +31,7 @@ export default function LoginScreen() {
 
                     <ThemedButton>
                         <ThemedText>Sign Up</ThemedText>
+                        <IconSymbol name='arrow.right'></IconSymbol>
                     </ThemedButton>
                 </Container>
 

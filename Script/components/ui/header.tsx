@@ -5,6 +5,7 @@ import { Href, Link } from 'expo-router';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context';
 import { IconSymbol } from './icon-symbol';
+import { SFSymbols6_0 } from 'sf-symbols-typescript';
 
 export type HeaderProps = {
     title?: string,
@@ -12,14 +13,14 @@ export type HeaderProps = {
 };
 
 export function Header({ title = "TODO", backPath, style, children }: SafeAreaViewProps & HeaderProps) {
-    const iconName = title === "Home" ? "house.fill" : "paperplane.fill";
+    const iconName: SFSymbols6_0 = title === "Home" ? 'house.fill' : 'arrow.right';
 
     return (
         <ThemedView>
             <SafeAreaView>
                 <ThemedView color='accent' style={styles.default}>
                     <Link href={backPath as Href} style={styles.backLink}>
-                        <IconSymbol size={28} name={iconName} color={'#000'} />
+                        <IconSymbol size={28} name={'house.fill'} color={'#000'} />
                     </Link>
                     <ThemedText type="title" style={{transform: [{translateY: 4}],}}>{title}</ThemedText>
                 </ThemedView>

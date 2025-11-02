@@ -2,6 +2,7 @@ import { ThemedImage } from '@/components/themed-image';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Header } from '@/components/ui/header';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ImageBoxInput } from '@/components/ui/image-box-input';
 import { ThemedButton } from '@/components/ui/themed-button';
 import { ScrollView, StyleSheet } from 'react-native';
@@ -27,12 +28,15 @@ export default function InputScreen() {
 
             <ThemedView color='accent' style={styles.verticalButtonMenu}>
                 <ThemedButton>
-                    <ThemedText>Paste from Keyboard</ThemedText>
+                    <IconSymbol name='doc.on.clipboard'></IconSymbol>
+                    <ThemedText>Paste</ThemedText>
                 </ThemedButton>
                 <ThemedButton>
+                    <IconSymbol name='paperclip'></IconSymbol>
                     <ThemedText>Open Files</ThemedText>
                 </ThemedButton>
                 <ThemedButton>
+                    <IconSymbol name='photo.fill.on.rectangle.fill'></IconSymbol>
                     <ThemedText>Gallery</ThemedText>
                 </ThemedButton>
             </ThemedView>
@@ -40,6 +44,7 @@ export default function InputScreen() {
             <ThemedView color='accent'>
                 <ThemedButton>
                     <ThemedText>Continue</ThemedText>
+                    <IconSymbol name='arrow.right'></IconSymbol>
                 </ThemedButton>
             </ThemedView>
 

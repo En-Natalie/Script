@@ -4,6 +4,7 @@
  */
 
 import { Platform } from 'react-native';
+import { SymbolViewProps } from 'expo-symbols';
 
 const tintColorLight = '#0a7ea4';
 const tintColorDark = '#fff';
@@ -33,29 +34,6 @@ export const Constants = {
   }
 }
 
-export const Icons = {
-  home: "home",
-  back: "",
-
-  remove: "",
-  approve: "",
-
-  generateID: "",
-  history: "",
-  credits: "",
-
-  pasteFromKeyboard: "",
-  openFiles: "",
-  gallery: "",
-  continue: "",
-
-  regenerate: "",
-  edit: "",
-
-  saveImage: "",
-  copyImage: "",
-  copyIDText: "",
-}
 
 export const Fonts = Platform.select({
   ios: {
