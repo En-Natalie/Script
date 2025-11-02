@@ -18,10 +18,10 @@ export function Header({ title = "TODO", backPath, style, children }: SafeAreaVi
         <ThemedView>
             <SafeAreaView>
                 <ThemedView color='accent' style={styles.default}>
-                    <Link href={backPath as Href}>
+                    <Link href={backPath as Href} style={styles.backLink}>
                         <IconSymbol size={28} name={iconName} color={'#000'} />
                     </Link>
-                    <ThemedText type="title" style={{transform: [{translateY: 3}],}}>{title}</ThemedText>
+                    <ThemedText type="title" style={{transform: [{translateY: 4}],}}>{title}</ThemedText>
                 </ThemedView>
             </SafeAreaView>
         </ThemedView>
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     default: {
         flexDirection: 'row',
         alignItems: 'flex-start',
-        gap: 10,
+        gap: 20,
         alignContent: 'center',
         borderBottomWidth: Constants.default.outlineWidth,
         padding: 10,
@@ -42,4 +42,15 @@ const styles = StyleSheet.create({
         maxHeight: 60,
         flex: 1,
     },
+    backLink: {
+        padding: 5,
+        borderRadius: Constants.default.borderRadius,
+        outlineColor: Colors.default.border,
+        outlineWidth: Constants.default.outlineWidth,
+        backgroundColor: Colors.default.button,
+        // alignItems: 'center',
+        // alignContent: 'center',
+        // justifyContent: 'center',
+        // width: 40,
+    }
   });
