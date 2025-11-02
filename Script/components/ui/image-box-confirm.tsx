@@ -38,7 +38,6 @@ export function ImageBoxConfirm({ children }: PropsWithChildren) {
 const styles = StyleSheet.create({
     topButtons: {
         flexDirection: 'row',
-        padding: 5,
         borderRadius: Constants.default.borderRadius,
         alignItems: 'center',
         alignContent: 'center',

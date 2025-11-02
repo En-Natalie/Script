@@ -33,9 +33,6 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
         width: '100%',
-        flex: 1,
-        flexDirection: 'row',
-        gap: 10,
     },
     touchableOpacity: {
         alignItems: 'center',
@@ -45,6 +42,6 @@ const styles = StyleSheet.create({
         height: '100%',
         flex: 1,
         flexDirection: 'row',
-        gap: 10,
+        gap: 5,
     }
 });
