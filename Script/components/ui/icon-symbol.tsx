@@ -42,7 +42,9 @@ const MAPPING = {
   'trash.fill': 'star', // remove
 
   'repeat': 'repeat', // regenerate id
-  'pencil.tip.crop.circle.badge.plus': 'edit' // edit id
+  'pencil.tip.crop.circle.badge.plus': 'edit', // edit id
+
+  'square.and.arrow.down': 'save', // save image
 } as IconMapping;
 
 /**
