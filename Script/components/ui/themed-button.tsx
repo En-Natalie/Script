@@ -7,7 +7,7 @@
 
 import { ThemedView } from '@/components/themed-view';
 import { Colors, Constants } from '@/constants/theme';
-import { StyleSheet, ViewProps } from 'react-native';
+import { StyleSheet, TouchableOpacity, ViewProps } from 'react-native';
 
 export type ThemedButtonProps = {
     color?: 'button' | 'red' | 'green',
@@ -16,7 +16,9 @@ export type ThemedButtonProps = {
 export function ThemedButton({ color = 'button', style = styles.default, children }: ViewProps & ThemedButtonProps) {
     return (
         <ThemedView color={color} style={style} >
-            {children}
+            <TouchableOpacity style={styles.touchableOpacity}>
+                {children}
+            </TouchableOpacity>
         </ThemedView>
     );
 }
@@ -35,4 +37,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: 10,
     },
+    touchableOpacity: {
+        alignItems: 'center',
+        alignContent: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        flex: 1,
+        flexDirection: 'row',
+        gap: 10,
+    }
 });

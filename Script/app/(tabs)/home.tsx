@@ -6,6 +6,8 @@ import { Header } from '@/components/ui/header';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ThemedButton } from '@/components/ui/themed-button';
 import { ScrollView, StyleSheet } from 'react-native';
+import { Link } from 'expo-router';
+import { Constants, Colors } from '@/constants/theme';
 
 export default function HomeScreen() {
     return (
@@ -42,4 +44,18 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 200,
     },
+    backLink: {
+        padding: 5,
+        borderRadius: Constants.default.borderRadius,
+        outlineColor: Colors.default.border,
+        outlineWidth: Constants.default.outlineWidth,
+        backgroundColor: Colors.default.button,
+        alignItems: 'center',
+        alignContent: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        flex: 1,
+        flexDirection: 'row',
+        gap: 10,
+    }
 });
