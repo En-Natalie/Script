@@ -3,7 +3,7 @@ import { StyleSheet, Text, type TextProps } from 'react-native';
 import { useThemeColor } from '@/hooks/use-theme-color';
 
 export type ThemedTextProps = TextProps & {
-  type?: 'default' | 'emphasis' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+  type?: 'default' | 'short' | 'emphasis' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
 };
 
 export function ThemedText({ style, type = 'default', ...rest }: ThemedTextProps) {
@@ -14,6 +14,7 @@ export function ThemedText({ style, type = 'default', ...rest }: ThemedTextProps
       style={[
         { color },
         type === 'default' ? styles.default : undefined,
+        type === 'short' ? styles.short : undefined,
         type === 'emphasis' ? styles.emphasis : undefined,
         type === 'title' ? styles.title : undefined,
         type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
@@ -30,7 +31,10 @@ const styles = StyleSheet.create({
   default: {
     fontSize: 16,
     lineHeight: 24,
-
+  },
+  short: {
+    fontSize: 16,
+    lineHeight: 16,
   },
   emphasis: {
     fontSize: 16,

@@ -16,7 +16,7 @@ export type ThemedButtonProps = {
 export function ThemedButton({ color = 'button', style = styles.default, children }: ViewProps & ThemedButtonProps) {
     return (
         <ThemedView color={color} style={style} >
-            <TouchableOpacity style={styles.touchableOpacity}>
+            <TouchableOpacity style={styles.touchableOpacity} >
                 {children}
             </TouchableOpacity>
         </ThemedView>

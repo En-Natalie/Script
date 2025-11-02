@@ -12,22 +12,24 @@ export default function CreditsScreen() {
             
                 <Container>
                     <ThemedText type='emphasis'>Developed by Group 37</ThemedText>
-                    <ThemedText>Amalia Aguilar</ThemedText>
-                    <ThemedText>Brian Hoang</ThemedText>
-                    <ThemedText>Natalie Nenachev</ThemedText>
-                    <ThemedText></ThemedText>
+                    <ThemedText type='short'>Amalia Aguilar</ThemedText>
+                    <ThemedText type='short'>Brian Hoang</ThemedText>
+                    <ThemedText type='short'>Natalie Nenachev</ThemedText>
+
+                    <ThemedText>- - - - -</ThemedText>
             
                     <ThemedText type='emphasis'>For CS 1200.004</ThemedText>
                     <ThemedText type='emphasis'>Project Assignment 3</ThemedText>
-                    <ThemedText></ThemedText>
             
+                    <ThemedText>- - - - -</ThemedText>
+
                     <ThemedText type='emphasis'>Tools Used</ThemedText>
-                    <ThemedText>Wireframe: Figma</ThemedText>
-                    <ThemedText>Frontend: React Native</ThemedText>
-                    <ThemedText>Backend: Node.js</ThemedText>
-                    <ThemedText>Cloud Service: Cloudinary</ThemedText>
-                    <ThemedText>Security Service: Qualysec</ThemedText>
-                    <ThemedText>AI Generator: Open AI</ThemedText>
+                    <ThemedText type='short'>Wireframe: Figma</ThemedText>
+                    <ThemedText type='short'>Frontend: React Native</ThemedText>
+                    <ThemedText type='short'>Backend: Node.js</ThemedText>
+                    <ThemedText type='short'>Cloud Service: Cloudinary</ThemedText>
+                    <ThemedText type='short'>Security Service: Qualysec</ThemedText>
+                    <ThemedText type='short'>AI Generator: Open AI</ThemedText>
                 </Container>
             </ThemedView>
         </ScrollView>
