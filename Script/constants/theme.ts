@@ -33,6 +33,30 @@ export const Constants = {
   }
 }
 
+export const Icons = {
+  home: "home",
+  back: "",
+
+  remove: "",
+  approve: "",
+
+  generateID: "",
+  history: "",
+  credits: "",
+
+  pasteFromKeyboard: "",
+  openFiles: "",
+  gallery: "",
+  continue: "",
+
+  regenerate: "",
+  edit: "",
+
+  saveImage: "",
+  copyImage: "",
+  copyIDText: "",
+}
+
 export const Fonts = Platform.select({
   ios: {
     /** iOS `UIFontDescriptorSystemDesignDefault` */
