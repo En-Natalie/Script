@@ -7,7 +7,7 @@ import { ScrollView } from 'react-native';
 export default function CreditsScreen() {
     return (
         <ScrollView stickyHeaderIndices={[0]}>
-            <Header title='Credits'></Header>
+            <Header title='Credits' backPath='home'></Header>
             <ThemedView color='background'>
             
                 <Container>

@@ -1,26 +1,26 @@
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { ThemedButton } from '@/components/ui/themed-button';
 import { Colors, Constants } from '@/constants/theme';
+import { Href, Link } from 'expo-router';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context';
 import { IconSymbol } from './icon-symbol';
 
 export type HeaderProps = {
-    title?: string
+    title?: string,
+    backPath: "index" | "credits" | "home" | "input" | "confirm",
 };
 
-export function Header({ title, style, children }: SafeAreaViewProps & HeaderProps) {
+export function Header({ title = "TODO", backPath, style, children }: SafeAreaViewProps & HeaderProps) {
     const iconName = title === "Home" ? "house.fill" : "paperplane.fill";
 
     return (
         <ThemedView>
             <SafeAreaView>
                 <ThemedView color='accent' style={styles.default}>
-                    {/* // TODO this doesn't work. dunno */}
-                    <ThemedButton square={true}> 
+                    <Link href={backPath as Href}>
                         <IconSymbol size={28} name={iconName} color={'#000'} />
-                    </ThemedButton> 
+                    </Link>
                     <ThemedText type="title" style={{transform: [{translateY: 3}],}}>{title}</ThemedText>
                 </ThemedView>
             </SafeAreaView>

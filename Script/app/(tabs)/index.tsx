@@ -6,13 +6,12 @@ import { ThemedView } from '@/components/themed-view';
 import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
 import { ThemedButton } from '@/components/ui/themed-button';
-import { Link } from 'expo-router';
 import { ScrollView } from 'react-native';
 
 export default function LoginScreen() {
     return (
         <ScrollView stickyHeaderIndices={[0]}>
-            <Header title='Log In'></Header>
+            <Header title='Log In' backPath='index' ></Header>
             <ThemedView color='background'>
 
                 <Container>
@@ -36,42 +35,6 @@ export default function LoginScreen() {
             </ThemedView>
         </ScrollView>
     )
-}
-
-function HomeScreen2() {
-    return (
-        <ThemedView color='background'>
-            <Header title="Log In"></Header>
-
-            
-            <ThemedView style={styles.stepContainer}>
-                <Link href="/modal">
-                    <Link.Trigger>
-                        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-                    </Link.Trigger>
-                    <Link.Preview />
-                    <Link.Menu>
-                        <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-                        <Link.MenuAction
-                            title="Share"
-                            icon="square.and.arrow.up"
-                            onPress={() => alert('Share pressed')}
-                        />
-                        <Link.Menu title="More" icon="ellipsis">
-                            <Link.MenuAction
-                                title="Delete"
-                                icon="trash"
-                                destructive
-                                onPress={() => alert('Delete pressed')}
-                            />
-                        </Link.Menu>
-                    </Link.Menu>
-                </Link>
-
-
-            </ThemedView>
-        </ThemedView>
-    );
 }
 
 const styles = StyleSheet.create({

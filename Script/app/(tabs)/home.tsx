@@ -9,7 +9,7 @@ import { ScrollView, StyleSheet } from 'react-native';
 export default function HomeScreen() {
     return (
         <ScrollView stickyHeaderIndices={[0]}>
-            <Header title='Home'></Header>
+            <Header title='Home' backPath='home'></Header>
             <ThemedView color='background'>
             
                 <Container>

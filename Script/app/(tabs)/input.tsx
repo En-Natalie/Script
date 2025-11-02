@@ -9,7 +9,7 @@ import { ScrollView, StyleSheet } from 'react-native';
 export default function InputScreen() {
     return (
         <ScrollView stickyHeaderIndices={[0]}>
-            <Header title='Input'></Header>
+            <Header title='Input' backPath='home'></Header>
             <ThemedView color='background'>
             
                 {/* images */}
