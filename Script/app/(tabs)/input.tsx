@@ -5,14 +5,26 @@ import { Header } from '@/components/ui/header';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ImageBoxInput } from '@/components/ui/image-box-input';
 import { ThemedButton } from '@/components/ui/themed-button';
+import { useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 
 export default function InputScreen() {
+    const [images, setImages] = useState([
+        { url: '@/assets/images/favicon.png' },
+        { url: '@/assets/images/favicon.png' },
+        { url: '@/assets/images/favicon.png' },
+    ]);
+
     return (
         <ScrollView stickyHeaderIndices={[0]}>
             <Header title='Input' backPath='home'></Header>
             <ThemedView color='background'>
             
+                for (obj : image) {
+                    <ImageBoxInput>
+                        <ThemedImage/>
+                    </ImageBoxInput>
+                }
                 {/* images */}
                 <ImageBoxInput>
                        <ThemedImage/>
