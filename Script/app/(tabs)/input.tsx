@@ -15,9 +15,8 @@ type ImageBuilder = {
 
 export default function InputScreen() {
     const [images, setImages] = useState<ImageBuilder[]>([
-        { url: "@/assets/images/favicon.png", id: 0 },
     ]);
-    const [nextId, setNextId] = useState<number>(1); // id for images to use TODO change to 0
+    const [nextId, setNextId] = useState<number>(0); 
 
     /**
      * Launches gallery, adds selected images to images array
@@ -28,7 +27,7 @@ export default function InputScreen() {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ['images'],
-            allowsMultipleSelection: true, // TODO duplicated keys happening...hm // may have fixed
+            allowsMultipleSelection: true,
             quality: 1,
         });
 
