@@ -7,6 +7,7 @@ import { ThemedButton } from '@/components/ui/themed-button';
 import { Fragment, useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import { useRouter } from 'expo-router'
 
 type ImageBuilder = {
     url: string;
@@ -19,6 +20,8 @@ export default function InputScreen() {
     const [images, setImages] = useState<ImageBuilder[]>([
     ]);
     const [nextId, setNextId] = useState<number>(0);
+
+    const router = useRouter();
 
     /**
      * Launches gallery, adds selected images to images array
@@ -79,15 +82,6 @@ export default function InputScreen() {
         <ScrollView stickyHeaderIndices={[0]}>
             <Header title='Input' backPath='home'></Header>
             <ThemedView color='background'>
-                {/*{images.map(ib =>*/}
-                {/*    <Fragment key={ib.id}>*/}
-                {/*        <ImageBoxInput*/}
-                {/*            id={ib.id}*/}
-                {/*            url={ib.url}*/}
-                {/*            onRemoveButtonPress={handleRemove}>*/}
-                {/*        </ImageBoxInput>*/}
-                {/*    </Fragment>*/}
-                {/*)}*/}
                 {imageBoxInputs}
             </ThemedView>
 
@@ -110,7 +104,7 @@ export default function InputScreen() {
             </ThemedView>
 
             <ThemedView color='accent'>
-                <ThemedButton>
+                <ThemedButton onPress={() => router.navigate('/confirm')}>
                     <ThemedText>Continue</ThemedText>
                     <IconSymbol name='arrow.right'></IconSymbol>
                 </ThemedButton>

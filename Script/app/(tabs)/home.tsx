@@ -8,27 +8,30 @@ import { ThemedButton } from '@/components/ui/themed-button';
 import { ScrollView, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
 import { Constants, Colors } from '@/constants/theme';
+import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
+    const router = useRouter();
+
     return (
         <ScrollView stickyHeaderIndices={[0]}>
             <Header title='Home' backPath='home'></Header>
             <ThemedView color='background'>
-            
+
                 <Container>
-                    <ThemedImage style={styles.logoImage}/> 
+                    <ThemedImage url={'asdf'} height={100} width={100} />
                 </Container>
 
                 <Container>
-                    <ThemedButton>
+                    <ThemedButton onPress={() => router.navigate('/input')}>
                         <IconSymbol name='sparkles'></IconSymbol>
                         <ThemedText>Generate ID</ThemedText>
                     </ThemedButton>
-                    <ThemedButton>
+                    <ThemedButton onPress={() => router.navigate('/credits')}>
                         <IconSymbol name='doc.text.magnifyingglass'></IconSymbol>
                         <ThemedText>View History</ThemedText>
                     </ThemedButton>
-                    <ThemedButton>
+                    <ThemedButton onPress={() => router.navigate('/credits')}>
                         <IconSymbol name='star'></IconSymbol>
                         <ThemedText>Credits</ThemedText>
                     </ThemedButton>
@@ -40,10 +43,6 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-    logoImage: { // TODO actually do the thing
-        width: '100%',
-        height: 200,
-    },
     backLink: {
         padding: 5,
         borderRadius: Constants.default.borderRadius,
