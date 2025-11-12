@@ -6,6 +6,7 @@ import { ImageBoxInput } from '@/components/ui/image-box-input';
 import { ThemedButton } from '@/components/ui/themed-button';
 import { Fragment, useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 
 type ImageBuilder = {
     url: string;
@@ -15,12 +16,42 @@ type ImageBuilder = {
 export default function InputScreen() {
     const [images, setImages] = useState<ImageBuilder[]>([
         { url: "@/assets/images/favicon.png", id: 0 },
-        { url: "@/assets/images/favicon.png", id: 1 },
-        { url: "@/assets/images/favicon.png", id: 2 },
-        { url: "@/assets/images/favicon.png", id: 3 },
-        { url: "@/assets/images/favicon.png", id: 4 },
     ]);
+    const [nextId, setNextId] = useState<number>(1); // id for images to use TODO change to 0
 
+    /**
+     * Launches gallery, adds selected images to images array
+     */
+    const openGallery = async () => {
+        console.log('Picking image...');
+
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ['images'],
+            allowsMultipleSelection: true, // TODO duplicated keys happening...hm // may have fixed
+            quality: 1,
+        });
+
+        console.log(result);
+
+        // if images were actually selected
+        if (!result.canceled) {
+            console.log("NOT CANCELED!");
+            let newImages: ImageBuilder[] = images.slice(); // why .slice? react only triggers a rerender if the memory address of the array in the state changes
+
+            // add to newImages array, increment id
+            for (let i = 0; i < result.assets.length; i++) {
+                newImages.push({url: result.assets[i].uri, id: nextId + 1 + i});
+                setNextId(nextId + 1 + i); // why +i? because React doesn't actually update the state until the function is over
+            }
+            setImages(newImages);
+        }
+    };
+
+    /**
+     * Passed to remove buttons of ImageBoxInputs, remove image with a given id
+     * @param id id of triggering ImageBoxInput, the one to be removed
+     */
     const handleRemove = (id: number) => {
         const newImages = images.filter((ib => ib.id !== id));
         setImages(newImages);
@@ -40,7 +71,16 @@ export default function InputScreen() {
         <ScrollView stickyHeaderIndices={[0]}>
             <Header title='Input' backPath='home'></Header>
             <ThemedView color='background'>
-                {imageBoxInputs}
+                {images.map(ib =>
+                    <Fragment key={ib.id}>
+                        <ImageBoxInput
+                            id={ib.id}
+                            url={ib.url}
+                            onRemoveButtonPress={handleRemove}>
+                        </ImageBoxInput>
+                    </Fragment>
+                )}
+                {/*{imageBoxInputs}*/}
             </ThemedView>
 
             {/* Button menu */}
@@ -55,7 +95,7 @@ export default function InputScreen() {
                     <IconSymbol name='paperclip'></IconSymbol>
                     <ThemedText>Open Files</ThemedText>
                 </ThemedButton>
-                <ThemedButton>
+                <ThemedButton onPress={openGallery}>
                     <IconSymbol name='photo.fill.on.rectangle.fill'></IconSymbol>
                     <ThemedText>Gallery</ThemedText>
                 </ThemedButton>
