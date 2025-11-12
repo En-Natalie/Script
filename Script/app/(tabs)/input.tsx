@@ -1,38 +1,46 @@
-import { ThemedImage } from '@/components/themed-image';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Header } from '@/components/ui/header';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ImageBoxInput } from '@/components/ui/image-box-input';
 import { ThemedButton } from '@/components/ui/themed-button';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 
+type ImageBuilder = {
+    url: string;
+    id: number;
+}
+
 export default function InputScreen() {
-    const [images, setImages] = useState([
-        { url: '@/assets/images/favicon.png' },
-        { url: '@/assets/images/favicon.png' },
-        { url: '@/assets/images/favicon.png' },
+    const [images, setImages] = useState<ImageBuilder[]>([
+        { url: "@/assets/images/favicon.png", id: 0 },
+        { url: "@/assets/images/favicon.png", id: 1 },
+        { url: "@/assets/images/favicon.png", id: 2 },
+        { url: "@/assets/images/favicon.png", id: 3 },
+        { url: "@/assets/images/favicon.png", id: 4 },
     ]);
+
+    const handleRemove = (id: number) => {
+        const newImages = images.filter((ib => ib.id !== id));
+        setImages(newImages);
+    }
+
+    const imageBoxInputs = images.map(ib =>
+        <Fragment key={ib.id}>
+            <ImageBoxInput
+                id={ib.id}
+                url={ib.url}
+                onRemoveButtonPress={handleRemove}>
+            </ImageBoxInput>
+        </Fragment>
+    );
 
     return (
         <ScrollView stickyHeaderIndices={[0]}>
             <Header title='Input' backPath='home'></Header>
             <ThemedView color='background'>
-            
-                for (obj : image) {
-                    <ImageBoxInput>
-                        <ThemedImage/>
-                    </ImageBoxInput>
-                }
-                {/* images */}
-                <ImageBoxInput>
-                       <ThemedImage/>
-                </ImageBoxInput>
-                <ImageBoxInput>
-                    <ThemedImage/>
-                </ImageBoxInput>
-
+                {imageBoxInputs}
             </ThemedView>
 
             {/* Button menu */}

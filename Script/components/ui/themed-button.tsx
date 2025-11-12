@@ -11,12 +11,13 @@ import { StyleSheet, TouchableOpacity, ViewProps } from 'react-native';
 
 export type ThemedButtonProps = {
     color?: 'button' | 'red' | 'green',
+    onPress?: () => void,
 };
 
-export function ThemedButton({ color = 'button', style = styles.default, children }: ViewProps & ThemedButtonProps) {
+export function ThemedButton({ color = 'button', onPress, style = styles.default, children }: ViewProps & ThemedButtonProps) {
     return (
         <ThemedView color={color} style={style} >
-            <TouchableOpacity style={styles.touchableOpacity} >
+            <TouchableOpacity style={styles.touchableOpacity} onPress={onPress} >
                 {children}
             </TouchableOpacity>
         </ThemedView>
