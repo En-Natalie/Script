@@ -11,12 +11,14 @@ import * as ImagePicker from 'expo-image-picker';
 type ImageBuilder = {
     url: string;
     id: number;
+    width: number;
+    height: number;
 }
 
 export default function InputScreen() {
     const [images, setImages] = useState<ImageBuilder[]>([
     ]);
-    const [nextId, setNextId] = useState<number>(0); 
+    const [nextId, setNextId] = useState<number>(0);
 
     /**
      * Launches gallery, adds selected images to images array
@@ -40,7 +42,12 @@ export default function InputScreen() {
 
             // add to newImages array, increment id
             for (let i = 0; i < result.assets.length; i++) {
-                newImages.push({url: result.assets[i].uri, id: nextId + 1 + i});
+                newImages.push({
+                    url: result.assets[i].uri,
+                    id: nextId + 1 + i,
+                    width: result.assets[i].width,
+                    height: result.assets[i].height,
+                });
                 setNextId(nextId + 1 + i); // why +i? because React doesn't actually update the state until the function is over
             }
             setImages(newImages);
@@ -61,6 +68,8 @@ export default function InputScreen() {
             <ImageBoxInput
                 id={ib.id}
                 url={ib.url}
+                width={ib.width}
+                height={ib.height}
                 onRemoveButtonPress={handleRemove}>
             </ImageBoxInput>
         </Fragment>
@@ -70,16 +79,16 @@ export default function InputScreen() {
         <ScrollView stickyHeaderIndices={[0]}>
             <Header title='Input' backPath='home'></Header>
             <ThemedView color='background'>
-                {images.map(ib =>
-                    <Fragment key={ib.id}>
-                        <ImageBoxInput
-                            id={ib.id}
-                            url={ib.url}
-                            onRemoveButtonPress={handleRemove}>
-                        </ImageBoxInput>
-                    </Fragment>
-                )}
-                {/*{imageBoxInputs}*/}
+                {/*{images.map(ib =>*/}
+                {/*    <Fragment key={ib.id}>*/}
+                {/*        <ImageBoxInput*/}
+                {/*            id={ib.id}*/}
+                {/*            url={ib.url}*/}
+                {/*            onRemoveButtonPress={handleRemove}>*/}
+                {/*        </ImageBoxInput>*/}
+                {/*    </Fragment>*/}
+                {/*)}*/}
+                {imageBoxInputs}
             </ThemedView>
 
             {/* Button menu */}
