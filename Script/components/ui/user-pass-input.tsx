@@ -1,5 +1,5 @@
 import { ThemedTextInput } from '@/components/themed-text-input';
-import {useRef, useState} from 'react'
+import {PropsWithChildren, useRef, useState} from 'react'
 import {ThemedText} from "@/components/themed-text";
 import {IconSymbol} from "@/components/ui/icon-symbol";
 import {ThemedButton} from "@/components/ui/themed-button";
@@ -10,7 +10,7 @@ export type UserPassInputProps = {
     buttonText: string,
 }
 
-export default function UserPassInput({onSubmitEditing, buttonText}: UserPassInputProps) {
+export default function UserPassInput({onSubmitEditing, buttonText, children}: UserPassInputProps & PropsWithChildren) {
 
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -39,6 +39,7 @@ export default function UserPassInput({onSubmitEditing, buttonText}: UserPassInp
                 <ThemedText>{buttonText}</ThemedText>
                 <IconSymbol name='arrow.right'></IconSymbol>
             </ThemedButton>
+            {children}
         </>
     )
 }

@@ -3,13 +3,14 @@ import { Colors, Constants } from '@/constants/theme';
 import { StyleSheet } from 'react-native';
 
 export type ContainerProps = {
+    color?: 'accent' | 'background' | 'button' | 'container' | 'red' | 'green',
     invisible?: boolean,
   };
 
-export function Container({ invisible = false, style = styles.default, children }: ThemedViewProps & ContainerProps) {
+export function Container({ color = 'background', invisible = false, style = styles.default, children }: ThemedViewProps & ContainerProps) {
     if (invisible) {
         return (
-            <ThemedView color='background' style={styles.invisible}>
+            <ThemedView color={color} style={styles.invisible}>
                 {children}
             </ThemedView>
         )

@@ -9,48 +9,56 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors.default.tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Log In',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="home"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="credits"
-        options={{
-          title: 'Credits',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="input"
-        options={{
-          title: 'Input',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="confirm"
-        options={{
-          title: 'Confirm',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
-        }}
-      />
+    return (
+        <Tabs
+            screenOptions={{
+                tabBarActiveTintColor: Colors.default.tint,
+                headerShown: false,
+                tabBarButton: HapticTab,
+            }}
+        >
+        <Tabs.Screen
+            name="index"
+            options={{
+                title: 'Log In',
+                tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
+            }}
+        />
+        <Tabs.Screen
+            name="signup"
+            options={{
+                title: 'Sign Up',
+                tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
+            }}
+        />
+        <Tabs.Screen
+            name="home"
+            options={{
+                title: 'Home',
+                tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
+            }}
+        />
+        <Tabs.Screen
+            name="credits"
+            options={{
+                title: 'Credits',
+                tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
+            }}
+        />
+        <Tabs.Screen
+            name="input"
+            options={{
+                title: 'Input',
+                tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
+            }}
+        />
+        <Tabs.Screen
+            name="confirm"
+            options={{
+                title: 'Confirm',
+                tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
+            }}
+        />
     </Tabs>
   );
 }

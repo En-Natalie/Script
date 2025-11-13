@@ -1,10 +1,3 @@
-{/* <Button
-  onPress={onPressLearnMore}
-  title="Learn More"
-  color="#841584"
-  accessibilityLabel="Learn more about this purple button"
-/> */}
-
 import { ThemedView } from '@/components/themed-view';
 import { Colors, Constants } from '@/constants/theme';
 import { StyleSheet, TouchableOpacity, ViewProps } from 'react-native';
