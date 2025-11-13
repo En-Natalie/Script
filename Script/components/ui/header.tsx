@@ -1,8 +1,8 @@
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Colors, Constants } from '@/constants/theme';
-import {Href, Link, useRouter} from 'expo-router';
-import {Button, StyleSheet, TouchableOpacity} from 'react-native';
+import { Href, useRouter} from 'expo-router';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context';
 import { IconSymbol } from './icon-symbol';
 import { SFSymbols6_0 } from 'sf-symbols-typescript';
@@ -21,16 +21,16 @@ export function Header({ title = "TODO", backPath, style, children }: SafeAreaVi
 
     const buttonOnPress = (title === "Home" || title === "Log In" || title === "Sign Up") ?
         () => {} :
-        () => router.navigate(backPath as Href);
+        () => router.dismissTo(backPath as Href);
 
     return (
         <ThemedView>
             <SafeAreaView>
                 <ThemedView color='accent' style={styles.default}>
                     <ThemedButton onPress={buttonOnPress} style={styles.backLink}>
-                        <IconSymbol size={28} name={iconName} color={'#000'} />
+                        <IconSymbol size={28} name={iconName} color={Colors.default.text} />
                     </ThemedButton>
-                    <ThemedText type="title" style={{transform: [{translateY: 4}],}}>{title}</ThemedText>
+                    <ThemedText type="title" style={{transform: [{translateY: 5}],}}>{title}</ThemedText>
                 </ThemedView>
             </SafeAreaView>
         </ThemedView>
