@@ -20,7 +20,7 @@ export default function SignupScreen() {
 
     return (
         <ScrollView stickyHeaderIndices={[0]}>
-            <Header title='Log In' backPath='index' ></Header>
+            <Header title='Log In' backPath='/index' ></Header>
             <ThemedView color='background'>
 
                 <Container>

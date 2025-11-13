@@ -80,7 +80,7 @@ export default function InputScreen() {
 
     return (
         <ScrollView stickyHeaderIndices={[0]}>
-            <Header title='Input' backPath='home'></Header>
+            <Header title='Input' backPath='/home'></Header>
             <ThemedView color='background'>
                 {imageBoxInputs}
             </ThemedView>

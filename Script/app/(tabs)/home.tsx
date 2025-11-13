@@ -6,7 +6,6 @@ import { Header } from '@/components/ui/header';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ThemedButton } from '@/components/ui/themed-button';
 import { ScrollView, StyleSheet } from 'react-native';
-import { Link } from 'expo-router';
 import { Constants, Colors } from '@/constants/theme';
 import { useRouter } from 'expo-router';
 
@@ -15,7 +14,7 @@ export default function HomeScreen() {
 
     return (
         <ScrollView stickyHeaderIndices={[0]}>
-            <Header title='Home' backPath='home'></Header>
+            <Header title='Home' backPath='/home'></Header>
             <ThemedView color='background'>
 
                 <Container>
