@@ -1,38 +1,30 @@
-import { StyleSheet } from 'react-native';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedTextInput } from '@/components/themed-text-input';
+import { StyleSheet, ScrollView } from 'react-native';
 import { ThemedView } from '@/components/themed-view';
 import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
-import { ThemedButton } from '@/components/ui/themed-button';
-import { ScrollView } from 'react-native';
-import { IconSymbol } from '@/components/ui/icon-symbol';
 import { useRouter } from 'expo-router'
-import { useState } from 'react'
+import UserPassInput from "@/components/ui/user-pass-input";
 
 export default function LoginScreen() {
     const router = useRouter();
 
-    const logIn = () => {
+    const logIn = (username: string, password: string) => {
         const valid = true; // TODO call Amalia's method!
+        console.log("Login attempt with: " + username + " " + password);
         if (valid) {
             router.navigate('/home');
         }
         // TODO error message saying no
     }
 
-    const signUp = () => {
+    const signUp = (username: string, password: string) => {
         const valid = true; // TODO call Amalia's method!
+        console.log("Sign up attempt with: " + username + " " + password);
         if (valid) {
             router.navigate('/home');
         }
         // TODO error message saying no
     }
-
-    const [signInUsername, setSignInUsername] = useState<string>("");
-    const [signInPassword, setSignInPassword] = useState<string>("");
-    const [logInUsername, setLogInUsername] = useState<string>("");
-    const [logInPassword, setLogInPassword] = useState<string>("");
 
     return (
         <ScrollView stickyHeaderIndices={[0]}>
@@ -40,23 +32,11 @@ export default function LoginScreen() {
             <ThemedView color='background'>
 
                 <Container>
-                    <ThemedTextInput placeholder="Username"></ThemedTextInput>
-                    <ThemedTextInput placeholder="Password"></ThemedTextInput>
-
-                    <ThemedButton onPress={() => logIn}>
-                        <ThemedText>Log In</ThemedText>
-                        <IconSymbol name='arrow.right'></IconSymbol>
-                    </ThemedButton>
+                    <UserPassInput onSubmitEditing={logIn} buttonText={'Log In'}/>
                 </Container>
 
                 <Container>
-                    <ThemedTextInput placeholder="Username"></ThemedTextInput>
-                    <ThemedTextInput placeholder="Password"></ThemedTextInput>
-
-                    <ThemedButton onPress={() => signUp}>
-                        <ThemedText>Sign Up</ThemedText>
-                        <IconSymbol name='arrow.right'></IconSymbol>
-                    </ThemedButton>
+                    <UserPassInput onSubmitEditing={signUp} buttonText={'Sign Up'}/>
                 </Container>
 
             </ThemedView>
@@ -64,7 +44,7 @@ export default function LoginScreen() {
     )
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ // TODO hey what's this for??
     titleContainer: {
         flexDirection: 'row',
         alignItems: 'center',
