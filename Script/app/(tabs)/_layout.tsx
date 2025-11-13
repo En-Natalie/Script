@@ -16,20 +16,20 @@ export default function TabLayout() {
               headerShown: false,
               tabBarButton: HapticTab,
           }}>
-          <Tabs.Screen
-              name="input"
-              options={{
-                  title: 'Input',
-                  tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
-              }}
-          />
-          <Tabs.Screen
-              name="confirm"
-              options={{
-                  title: 'Confirm',
-                  tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
-              }}
-          />
+          {/*<Tabs.Screen*/}
+          {/*    name="input"*/}
+          {/*    options={{*/}
+          {/*        title: 'Input',*/}
+          {/*        tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,*/}
+          {/*    }}*/}
+          {/*/>*/}
+          {/*<Tabs.Screen*/}
+          {/*    name="confirm"*/}
+          {/*    options={{*/}
+          {/*        title: 'Confirm',*/}
+          {/*        tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,*/}
+          {/*    }}*/}
+          {/*/>*/}
       </Tabs>
   );
 }

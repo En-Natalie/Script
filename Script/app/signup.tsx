@@ -22,7 +22,7 @@ export default function SignupScreen() {
 
     return (
         <ScrollView stickyHeaderIndices={[0]}>
-            <Header title='Log In' backPath='/signup' ></Header>
+            <Header title='Sign Up' backPath='/signup' ></Header>
             <ThemedView color='background'>
 
                 <Container>
