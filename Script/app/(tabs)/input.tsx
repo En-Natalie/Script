@@ -66,7 +66,7 @@ export default function InputScreen() {
         setImages(newImages);
     }
 
-    const imageBoxInputs = images.map(ib =>
+    const imageBoxes = images.map(ib =>
         <Fragment key={ib.id}>
             <ImageBoxInput
                 id={ib.id}
@@ -82,7 +82,7 @@ export default function InputScreen() {
         <ScrollView stickyHeaderIndices={[0]}>
             <Header title='Input' backPath='/home'></Header>
             <ThemedView color='background'>
-                {imageBoxInputs}
+                {imageBoxes}
             </ThemedView>
 
             {/* Button menu */}
