@@ -10,7 +10,7 @@ import {ThemedButton} from "@/components/ui/themed-button";
 
 export type HeaderProps = {
     title?: string,
-    backPath: "/index" | "/credits" | "/home" | "/input" | "/confirm",
+    backPath: "/" | '/signup' | '/home' | "/credits" | "/input" | "/confirm",
 };
 
 export function Header({ title = "TODO", backPath, style, children }: SafeAreaViewProps & HeaderProps) {

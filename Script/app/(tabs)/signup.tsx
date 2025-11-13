@@ -1,10 +1,12 @@
-import {StyleSheet, ScrollView, Text} from 'react-native';
+import { ScrollView } from 'react-native';
 import { ThemedView } from '@/components/themed-view';
 import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
 import { useRouter } from 'expo-router'
 import UserPassInput from "@/components/ui/user-pass-input";
-import {ThemedText} from "@/components/themed-text";
+import { ThemedText } from "@/components/themed-text";
+import { ThemedButton } from "@/components/ui/themed-button";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 
 export default function SignupScreen() {
     const router = useRouter();
@@ -20,7 +22,7 @@ export default function SignupScreen() {
 
     return (
         <ScrollView stickyHeaderIndices={[0]}>
-            <Header title='Log In' backPath='/index' ></Header>
+            <Header title='Log In' backPath='/signup' ></Header>
             <ThemedView color='background'>
 
                 <Container>
@@ -29,6 +31,14 @@ export default function SignupScreen() {
 
                 <Container>
                     <UserPassInput onSubmitEditing={signUp} buttonText={'Sign Up'}/>
+                </Container>
+
+                <Container>
+                    <ThemedText type={"emphasis"}>Existing user?</ThemedText>
+                    <ThemedButton onPress={() => router.navigate('/')}>
+                        <ThemedText>Log in!</ThemedText>
+                        <IconSymbol name={'arrow.right'}></IconSymbol>
+                    </ThemedButton>
                 </Container>
 
             </ThemedView>

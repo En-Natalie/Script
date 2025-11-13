@@ -22,7 +22,7 @@ export default function LoginScreen() {
 
     return (
         <ScrollView stickyHeaderIndices={[0]}>
-            <Header title='Log In' backPath='/index' ></Header>
+            <Header title='Log In' backPath='/' ></Header>
             <ThemedView color='background'>
 
                 <Container>
