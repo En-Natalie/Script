@@ -36,7 +36,7 @@ export default function LoginScreen() {
 
                 <Container>
                     <ThemedText type={"emphasis"}>New user?</ThemedText>
-                    <ThemedButton onPress={() => router.navigate('/signup')}>
+                    <ThemedButton onPress={() => router.replace('/signup')}>
                         <ThemedText>Sign up!</ThemedText>
                         <IconSymbol name={'arrow.right'}></IconSymbol>
                     </ThemedButton>

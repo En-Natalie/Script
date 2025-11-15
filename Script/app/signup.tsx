@@ -15,7 +15,7 @@ export default function SignupScreen() {
         const valid = true; // TODO call Amalia's method!
         console.log("Sign up attempt with: " + username + " " + password);
         if (valid) {
-            router.navigate('/home');
+            router.replace('/home');
         }
         // TODO error message saying no
     }
@@ -35,7 +35,7 @@ export default function SignupScreen() {
 
                 <Container>
                     <ThemedText type={"emphasis"}>Existing user?</ThemedText>
-                    <ThemedButton onPress={() => router.navigate('/')}>
+                    <ThemedButton onPress={() => router.replace('/')}>
                         <ThemedText>Log in!</ThemedText>
                         <IconSymbol name={'arrow.right'}></IconSymbol>
                     </ThemedButton>
