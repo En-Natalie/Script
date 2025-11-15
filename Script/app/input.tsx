@@ -5,9 +5,10 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ImageBoxInput } from '@/components/ui/image-box-input';
 import { ThemedButton } from '@/components/ui/themed-button';
 import { Fragment, useState } from 'react';
-import {Image, ScrollView, StyleSheet} from 'react-native';
+import { ScrollView, StyleSheet} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router'
+import {getImageAsync} from "expo-clipboard";
 
 export type ImageBuilder = {
     url: string;
@@ -25,6 +26,24 @@ export default function InputScreen() {
 
     const router = useRouter();
 
+    // TODO why does it take so long ?? what..
+    const pasteImage = async () => {
+        const image = await getImageAsync({ format: 'png' })
+
+        if (image?.data) {
+            const newImages: ImageBuilder[] = images.slice(); // why .slice? react only triggers a rerender if the memory address of the array in the state changes
+
+            newImages.push({
+                url: image.data,
+                id: nextId,
+                height: image.size.height,
+                width: image.size.width,
+            })
+            setNextId(nextId + 1);
+            setImages(newImages);
+        }
+    }
+
     /**
      * Launches gallery, adds selected images to images array
      */
@@ -41,7 +60,7 @@ export default function InputScreen() {
         // if images were actually selected
         if (!result.canceled) {
             console.log("NOT CANCELED!");
-            let newImages: ImageBuilder[] = images.slice(); // why .slice? react only triggers a rerender if the memory address of the array in the state changes
+            const newImages: ImageBuilder[] = images.slice(); // why .slice? react only triggers a rerender if the memory address of the array in the state changes
 
             // add to newImages array, increment id
             for (let i = 0; i < result.assets.length; i++) {
@@ -89,7 +108,7 @@ export default function InputScreen() {
             <ThemedView color='accent' style={styles.buttonMenu}>
 
             <ThemedView color='accent' style={styles.verticalButtonMenu}>
-                <ThemedButton>
+                <ThemedButton onPress={pasteImage}>
                     <IconSymbol name='doc.on.clipboard'></IconSymbol>
                     <ThemedText>Paste</ThemedText>
                 </ThemedButton>

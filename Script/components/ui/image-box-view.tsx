@@ -24,11 +24,12 @@ function ImageBoxView({ id, url, width, height, description }: ImageBoxViewProps
     }
 
     const copyImage = async () => {
-        await setImageAsync(url) // TODO dunno what the promise does again lmao
+        // const base64 = await FileSystem.readAsStringAsync(url, { encoding: 'base64' }); // this may be a thing? but unsure.
+        await setImageAsync(url)
     }
 
     const copyText = async () => {
-        await setStringAsync(description) // TODO dunno what the promise does lmao
+        await setStringAsync(description)
     }
 
     return (
