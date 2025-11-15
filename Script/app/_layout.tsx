@@ -21,6 +21,7 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="signup" options={{ headerShown: false }} />
         <Stack.Screen name="home" options={{ headerShown: false }} />
+        <Stack.Screen name="history" options={{ headerShown: false }} />
         <Stack.Screen name="credits" options={{ headerShown: false }} />
         <Stack.Screen name="input" options={{headerShown: false }} />
         <Stack.Screen name="confirm" options={{headerShown: false}} />

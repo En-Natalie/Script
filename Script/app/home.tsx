@@ -26,7 +26,7 @@ export default function HomeScreen() {
                         <IconSymbol name='sparkles'></IconSymbol>
                         <ThemedText>Generate ID</ThemedText>
                     </ThemedButton>
-                    <ThemedButton onPress={() => router.navigate('/credits')}>
+                    <ThemedButton onPress={() => router.navigate('/history')}>
                         <IconSymbol name='doc.text.magnifyingglass'></IconSymbol>
                         <ThemedText>View History</ThemedText>
                     </ThemedButton>

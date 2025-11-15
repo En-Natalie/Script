@@ -54,11 +54,6 @@ export default function ConfirmScreen() {
         });
     }
 
-    // Use the image with public ID, 'front_face'.
-    // const myImage = cloudinary.image('Screenshot_2025-09-26_at_9.40.51_PM_jox13m');
-    // const myImage = cloudinary.image('')
-    {/*<AdvancedImage cldImg={myImage} style={{ width: 200, height: 25, alignSelf: 'center'}} />*/}
-
     const router = useRouter();
 
     const [images, setImages] = useState<ImageCBuilder[]>([{ // a temp loading image
