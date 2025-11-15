@@ -15,7 +15,7 @@ export default function LoginScreen() {
         const valid = true; // TODO call Amalia's method!
         console.log("Login attempt with: " + username + " " + password);
         if (valid) {
-            router.navigate('/home');
+            router.replace('/home');
         }
         // TODO error message saying no
     }
