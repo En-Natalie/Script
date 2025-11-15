@@ -5,6 +5,8 @@ import { ScrollView } from 'react-native';
 import { Fragment, useEffect, useState} from "react";
 import { useRouter} from "expo-router";
 import { globalImages } from "@/app/input";
+import { upload, UploadApiOptions} from 'cloudinary-react-native';
+import { Cloudinary } from '@cloudinary/url-gen';
 
 export type ImageCBuilder = {
     url: string;
@@ -19,7 +21,44 @@ export function resetAcceptedImages(): void {
     acceptedImages = [];
 }
 
-export default function InputScreen() {
+export default function ConfirmScreen() {
+    const cloudinary = new Cloudinary({
+        cloud: {
+            cloudName: "script-cs",
+        },
+        url: {
+            secure: true
+        }
+    });
+
+    const options: UploadApiOptions = {
+        upload_preset: 'default_upload',
+        unsigned: true,
+        metadata: {
+            'username': 'high',
+            'description': 'hello world' // TODO this isn't working properly
+        },
+    }
+
+    const uploadToCloudinary = async (uri: string) => {
+        console.log("uploading to cloudainary...");
+        await upload(cloudinary, {file: uri , options: options, callback: (error: any, response: any) => {
+                console.log("error: " + error);
+                console.log("response: " + response);
+            }})
+        console.log('done uploading!');
+
+        upload(cloudinary,{ file: uri, options: options, callback: (error: any, response: any) => {
+                on_success: "current_asset.update({ metadata: { rating: 'high', usage_types: ['web', 'print', 'social'] } })"
+            }
+        });
+    }
+
+    // Use the image with public ID, 'front_face'.
+    // const myImage = cloudinary.image('Screenshot_2025-09-26_at_9.40.51_PM_jox13m');
+    // const myImage = cloudinary.image('')
+    {/*<AdvancedImage cldImg={myImage} style={{ width: 200, height: 25, alignSelf: 'center'}} />*/}
+
     const router = useRouter();
 
     const [images, setImages] = useState<ImageCBuilder[]>([{ // a temp loading image
@@ -28,8 +67,7 @@ export default function InputScreen() {
         width: 100,
         height: 50,
         description: "Loading..."
-    }
-    ]);
+    }]);
 
     useEffect(() => {
         const converted: ImageCBuilder[] = [];
@@ -50,7 +88,7 @@ export default function InputScreen() {
         if (acceptedImage) {
             console.log("accepted image found!");
             acceptedImages.push(acceptedImage);
-            // TODO upload to cloudinary
+            uploadToCloudinary(acceptedImage.url);
         }
         else {
             console.log("accepted image NOT found :(");
