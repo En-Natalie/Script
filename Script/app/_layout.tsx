@@ -24,6 +24,7 @@ export default function RootLayout() {
         <Stack.Screen name="credits" options={{ headerShown: false }} />
         <Stack.Screen name="input" options={{headerShown: false }} />
         <Stack.Screen name="confirm" options={{headerShown: false}} />
+        <Stack.Screen name="results" options={{headerShown: false}} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

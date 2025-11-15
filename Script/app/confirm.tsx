@@ -6,7 +6,7 @@ import { Fragment, useEffect, useState} from "react";
 import { useRouter} from "expo-router";
 import { globalImages } from "@/app/input";
 
-type ImageCBuilder = {
+export type ImageCBuilder = {
     url: string;
     id: number;
     width: number;
@@ -14,7 +14,10 @@ type ImageCBuilder = {
     description: string;
 }
 
-const acceptedImages: ImageCBuilder[] = [];
+export let acceptedImages: ImageCBuilder[] = [];
+export function resetAcceptedImages(): void {
+    acceptedImages = [];
+}
 
 export default function InputScreen() {
     const router = useRouter();
@@ -43,9 +46,14 @@ export default function InputScreen() {
     }, [setImages]);
 
     const handleAccept = (id: number) => {
-        const acceptedImage = acceptedImages.find(i => i.id === id);
+        const acceptedImage = images.find(i => i.id === id);
         if (acceptedImage) {
+            console.log("accepted image found!");
             acceptedImages.push(acceptedImage);
+            // TODO upload to cloudinary
+        }
+        else {
+            console.log("accepted image NOT found :(");
         }
         handleRemove(id);
     }
@@ -58,7 +66,7 @@ export default function InputScreen() {
         const newImages = images.filter((ib => ib.id !== id));
         setImages(newImages);
         if (newImages.length === 0) { // images is not updated at this time (state updating called as queue), must use newImages
-            router.dismissTo('/home'); // TODO actually go to results, also pass the images
+            router.navigate('/results');
         }
     }
 

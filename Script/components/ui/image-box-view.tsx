@@ -6,13 +6,24 @@ import { ThemedText } from '../themed-text';
 import { ThemedButton } from './themed-button';
 import { IconSymbol } from './icon-symbol';
 import { ThemedView } from '../themed-view';
+import {ThemedImage} from "@/components/themed-image";
 
-export function ImageBoxView({ children }: PropsWithChildren) {
+export type ImageBoxViewProps = {
+    id: number,
+    url: string,
+    width: number,
+    height: number,
+    description: string,
+};
+
+
+function ImageBoxView({ id, url, width, height, description }: ImageBoxViewProps) {
     return (
         <Container>
-            { children }
+            <ThemedImage url={url} width={width} height={height}/>
+
             <ThemedText>
-                This is the image description hahaha
+                {description}
             </ThemedText>
             
             <ThemedView color='container' style={styles.imageButtons} >
@@ -33,6 +44,8 @@ export function ImageBoxView({ children }: PropsWithChildren) {
         </Container>
     );
 }
+
+export default ImageBoxView
 
 const styles = StyleSheet.create({
     imageButtons: {

@@ -38,8 +38,6 @@ export default function InputScreen() {
             quality: 1,
         });
 
-        console.log(result);
-
         // if images were actually selected
         if (!result.canceled) {
             console.log("NOT CANCELED!");
