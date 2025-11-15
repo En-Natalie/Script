@@ -2,14 +2,9 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
-import { Colors, Constants } from '@/constants/theme';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Header } from '@/components/ui/header';
-import {Text} from "react-native";
-import {ThemedText} from "@/components/themed-text";
-import {ThemedButton} from "@/components/ui/themed-button";
-import {IconSymbol} from "@/components/ui/icon-symbol";
 
 export const unstable_settings = {
   anchor: '(tabs)',
@@ -17,10 +12,6 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-
-  const getHeader = () => {
-      return <Header backPath={"/"}></Header>
-  }
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>

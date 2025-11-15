@@ -5,16 +5,18 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ImageBoxInput } from '@/components/ui/image-box-input';
 import { ThemedButton } from '@/components/ui/themed-button';
 import { Fragment, useState } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import {Image, ScrollView, StyleSheet} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router'
 
-type ImageBuilder = {
+export type ImageBuilder = {
     url: string;
     id: number;
     width: number;
     height: number;
 }
+
+export let globalImages: ImageBuilder[] = [];
 
 export default function InputScreen() {
     const [images, setImages] = useState<ImageBuilder[]>([
@@ -104,7 +106,7 @@ export default function InputScreen() {
             </ThemedView>
 
             <ThemedView color='accent'>
-                <ThemedButton onPress={() => router.navigate('/confirm')}>
+                <ThemedButton onPress={() => {globalImages = images; router.navigate({pathname: '/confirm', params: { images: images.map(ib => JSON.stringify(ib)) } })}}>
                     <ThemedText>Continue</ThemedText>
                     <IconSymbol name='arrow.right'></IconSymbol>
                 </ThemedButton>

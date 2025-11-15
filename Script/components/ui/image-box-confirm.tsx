@@ -13,10 +13,11 @@ export type ImageBoxConfirmProps = {
     width: number,
     height: number,
     description: string,
+    onAcceptButtonPress: (id: number) => void,
     onRemoveButtonPress: (id: number) => void,
 };
 
-export function ImageBoxConfirm({id, url, width, height, description = 'hehh heh description', onRemoveButtonPress}: ImageBoxConfirmProps) {
+export function ImageBoxConfirm({id, url, width, height, description = 'hehh heh description', onAcceptButtonPress, onRemoveButtonPress}: ImageBoxConfirmProps) {
     const onRegenerateButton = () => {
         console.log('Regenerate button' + id);
         setText("");
@@ -25,11 +26,6 @@ export function ImageBoxConfirm({id, url, width, height, description = 'hehh heh
     const onEditButtonPress = () => {
         console.log('Edit button' + id);
         setText(text + "0");
-    }
-
-    const onApproveButtonPress = () => {
-        console.log('Approve button' + id);
-        onRemoveButtonPress(id);
     }
 
     const [text, setText] = useState<string>('');
@@ -41,7 +37,7 @@ export function ImageBoxConfirm({id, url, width, height, description = 'hehh heh
                     <IconSymbol name='trash.fill'></IconSymbol>
                     <ThemedText>Remove</ThemedText>
                 </ThemedButton>
-                <ThemedButton color='green' onPress={onApproveButtonPress}>
+                <ThemedButton color='green' onPress={onAcceptButtonPress.bind(null, id)}>
                     <IconSymbol name='hand.thumbsup.fill'></IconSymbol>
                     <ThemedText>Approve</ThemedText>
                 </ThemedButton>

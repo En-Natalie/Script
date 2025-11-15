@@ -1,12 +1,10 @@
-import { ThemedImage } from '@/components/themed-image';
 import { ThemedView } from '@/components/themed-view';
 import { Header } from '@/components/ui/header';
 import { ImageBoxConfirm } from '@/components/ui/image-box-confirm';
-import { ImageBoxView } from '@/components/ui/image-box-view';
 import { ScrollView } from 'react-native';
-import {Fragment, useState} from "react";
-import {useRouter} from "expo-router";
-import {ImageBoxInput} from "@/components/ui/image-box-input";
+import { Fragment, useEffect, useState} from "react";
+import { useRouter} from "expo-router";
+import { globalImages } from "@/app/input";
 
 type ImageCBuilder = {
     url: string;
@@ -16,17 +14,41 @@ type ImageCBuilder = {
     description: string;
 }
 
+const acceptedImages: ImageCBuilder[] = [];
+
 export default function InputScreen() {
-    const [images, setImages] = useState<ImageCBuilder[]>([
-        {
-            url: '@/assets/images/favicon.png',
-            id: 0,
-            width: 100,
-            height: 100,
-            description: "description 12"
-        }
+    const router = useRouter();
+
+    const [images, setImages] = useState<ImageCBuilder[]>([{ // a temp loading image
+        url: '@/assets/images/favicon.png',
+        id: 0,
+        width: 100,
+        height: 50,
+        description: "Loading..."
+    }
     ]);
-    const [nextId, setNextId] = useState<number>(100); // TODO update num
+
+    useEffect(() => {
+        const converted: ImageCBuilder[] = [];
+
+        globalImages.forEach(i => converted.push({
+            url: i.url,
+            id: i.id,
+            width: i.width,
+            height: i.height,
+            description: 'Insert image description here'})); // TODO call ai
+
+        console.log(converted);
+        setImages(converted);
+    }, [setImages]);
+
+    const handleAccept = (id: number) => {
+        const acceptedImage = acceptedImages.find(i => i.id === id);
+        if (acceptedImage) {
+            acceptedImages.push(acceptedImage);
+        }
+        handleRemove(id);
+    }
 
     /**
      * Passed to remove buttons of ImageBoxInputs, remove image with a given id
@@ -35,6 +57,9 @@ export default function InputScreen() {
     const handleRemove = (id: number) => {
         const newImages = images.filter((ib => ib.id !== id));
         setImages(newImages);
+        if (newImages.length === 0) { // images is not updated at this time (state updating called as queue), must use newImages
+            router.dismissTo('/home'); // TODO actually go to results, also pass the images
+        }
     }
 
     const imageBoxes = images.map(ib =>
@@ -44,6 +69,7 @@ export default function InputScreen() {
                 url={ib.url}
                 width={ib.width}
                 height={ib.height}
+                onAcceptButtonPress={handleAccept}
                 onRemoveButtonPress={handleRemove}
                 description={ib.description}>
             </ImageBoxConfirm>
@@ -54,7 +80,7 @@ export default function InputScreen() {
         <ScrollView stickyHeaderIndices={[0]}>
             <Header title='Confirm' backPath='/home'></Header>
             <ThemedView color='background'>
-            
+
                 {imageBoxes}
 
             </ThemedView>
