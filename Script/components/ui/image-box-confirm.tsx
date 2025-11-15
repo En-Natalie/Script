@@ -20,7 +20,7 @@ export type ImageBoxConfirmProps = {
 export function ImageBoxConfirm({id, url, width, height, description = 'hehh heh description', onAcceptButtonPress, onRemoveButtonPress}: ImageBoxConfirmProps) {
     const onRegenerateButton = () => {
         console.log('Regenerate button' + id);
-        setText("");
+        setText('');
     }
 
     const onEditButtonPress = () => {
@@ -28,7 +28,7 @@ export function ImageBoxConfirm({id, url, width, height, description = 'hehh heh
         setText(text + "0");
     }
 
-    const [text, setText] = useState<string>('');
+    const [text, setText] = useState<string>(description);
 
     return (
         <Container>
@@ -45,7 +45,7 @@ export function ImageBoxConfirm({id, url, width, height, description = 'hehh heh
             <ThemedImage url={url} width={width} height={height}/>
 
             <ThemedText>
-                {description}
+                {text}
             </ThemedText>
 
             <ThemedButton onPress={onRegenerateButton}>
