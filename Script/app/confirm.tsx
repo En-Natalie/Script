@@ -36,14 +36,14 @@ export default function ConfirmScreen() {
         upload_preset: 'default_upload',
         unsigned: true,
         // image_metadata: true,
-        metadata: {
-            'username': 'high',
-            'description': 'hello world' // TODO this isn't working properly
-        },
+        metadata: 'username=rahh|description=green'
     }
 
     const uploadToCloudinary = async (uri: string, description: string) => {
         console.log("uploading to cloudainary...");
+
+        const username = 'username_here';
+        options.metadata = 'username=' + username + '|description=' + description;
 
         await upload(cloudinary, {
             file: uri ,
@@ -55,11 +55,6 @@ export default function ConfirmScreen() {
         })
 
         console.log('done uploading!');
-
-        upload(cloudinary,{ file: uri, options: options, callback: (error: any, response: any) => {
-                on_success: "current_asset.update({ metadata: { rating: 'high', usage_types: ['web', 'print', 'social'] } })"
-            }
-        });
     }
 
     const router = useRouter();
