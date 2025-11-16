@@ -86,7 +86,7 @@ export default function ConfirmScreen() {
         setImages(converted);
 
         if (converted.length === 0) {
-            router.navigate('/results')
+            router.replace('/results')
         }
     }, [setImages]);
 
@@ -112,7 +112,7 @@ export default function ConfirmScreen() {
         const newImages = images.filter((ib => ib.id !== id));
         setImages(newImages);
         if (newImages.length === 0) { // images is not updated at this time (state updating called as queue), must use newImages
-            router.navigate('/results');
+            router.replace('/results');
         }
     }
 
