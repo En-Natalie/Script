@@ -34,6 +34,10 @@ export default function HomeScreen() {
                         <IconSymbol name='star'></IconSymbol>
                         <ThemedText>Credits</ThemedText>
                     </ThemedButton>
+                    <ThemedButton onPress={() => router.replace('/')}>
+                        <IconSymbol name='arrow.left'></IconSymbol>
+                        <ThemedText>Log Out</ThemedText>
+                    </ThemedButton>
                 </Container>
                 
             </ThemedView>
