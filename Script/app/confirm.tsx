@@ -1,7 +1,7 @@
 import { ThemedView } from '@/components/themed-view';
 import { Header } from '@/components/ui/header';
 import { ImageBoxConfirm } from '@/components/ui/image-box-confirm';
-import { ScrollView } from 'react-native';
+import {KeyboardAvoidingView, ScrollView} from 'react-native';
 import { Fragment, useEffect, useState} from "react";
 import { useRouter} from "expo-router";
 import { globalImages } from "@/app/input";
@@ -118,7 +118,7 @@ export default function ConfirmScreen() {
     );
 
     return (
-        <ScrollView stickyHeaderIndices={[0]}>
+        <ScrollView stickyHeaderIndices={[0]} automaticallyAdjustKeyboardInsets={true}>
             <Header title='Confirm' backPath='/home'></Header>
             <ThemedView color='background'>
 

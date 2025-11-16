@@ -21,7 +21,7 @@ export default function SignupScreen() {
     }
 
     return (
-        <ScrollView stickyHeaderIndices={[0]}>
+        <ScrollView stickyHeaderIndices={[0]} automaticallyAdjustKeyboardInsets={true}>
             <Header title='Sign Up' backPath='/signup' ></Header>
             <ThemedView color='background'>
 

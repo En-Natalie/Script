@@ -21,7 +21,7 @@ export default function LoginScreen() {
     }
 
     return (
-        <ScrollView stickyHeaderIndices={[0]}>
+        <ScrollView stickyHeaderIndices={[0]} automaticallyAdjustKeyboardInsets={true}>
             <Header title='Log In' backPath='/' ></Header>
             <ThemedView color='background'>
 
