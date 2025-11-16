@@ -8,15 +8,20 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedButton } from "@/components/ui/themed-button";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import {Colors} from "@/constants/theme";
+import { setCurrentUsername} from "@/app/index";
 
 export default function SignupScreen() {
     const router = useRouter();
 
     const signUp = (username: string, password: string) => {
-        const valid = true; // TODO call Amalia's method!
+        const valid = username != ''; // TODO call Amalia's method!
         console.log("Sign up attempt with: " + username + " " + password);
         if (valid) {
             router.replace('/home');
+            setCurrentUsername(username);
+        }
+        else {
+            console.log("bad username");
         }
         // TODO error message saying no
     }

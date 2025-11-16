@@ -10,6 +10,7 @@ import {IconSymbol} from "@/components/ui/icon-symbol";
 import {Colors} from "@/constants/theme";
 
 export let currentUsername: string = '';
+export function setCurrentUsername(username: string): void { currentUsername = username; }
 
 export default function LoginScreen() {
     const router = useRouter();
