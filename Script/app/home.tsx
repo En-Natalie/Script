@@ -5,12 +5,31 @@ import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ThemedButton } from '@/components/ui/themed-button';
-import { ScrollView, StyleSheet } from 'react-native';
+import {Image, ScrollView, StyleSheet} from 'react-native';
 import { Constants, Colors } from '@/constants/theme';
 import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
     const router = useRouter();
+
+    const logoURL = require('@/assets/images/script-logo-small.png');
+    const h = logoURL.height;
+    const w = logoURL.width;
+    const aspectRatio = w / h;
+
+    const logoImage = <Image
+        style={[{
+            borderWidth: Constants.default.outlineWidth,
+            borderColor: Colors.default.border,
+            borderRadius: Constants.default.borderRadius,
+            flex: 1,
+            resizeMode: 'cover',
+            width: '100%',
+            aspectRatio: aspectRatio,
+        }]}
+        source={logoURL} // previous thing
+        // source={{ uri: url }}
+    />
 
     return (
         <ScrollView stickyHeaderIndices={[0]}>
@@ -18,7 +37,8 @@ export default function HomeScreen() {
             <ThemedView color='background'>
 
                 <Container>
-                    <ThemedImage url={'asdf'} height={100} width={100} />
+                    {logoImage}
+                    {/*<ThemedImage url={'asdf'} height={100} width={100} />*/}
                 </Container>
 
                 <Container>
