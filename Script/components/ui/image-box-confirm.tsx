@@ -1,11 +1,12 @@
 import { Container } from '@/components/ui/container';
 import { Constants } from '@/constants/theme';
-import {PropsWithChildren, useState} from 'react';
-import { StyleSheet, View } from 'react-native';
+import { useRef, useState } from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
 import { ThemedText } from '../themed-text';
 import { ThemedButton } from './themed-button';
 import { IconSymbol } from './icon-symbol';
-import {ThemedImage} from "@/components/themed-image";
+import {ThemedImage } from "@/components/themed-image";
+import {ThemedTextInput } from "@/components/themed-text-input";
 
 export type ImageBoxConfirmProps = {
     id: number,
@@ -17,15 +18,25 @@ export type ImageBoxConfirmProps = {
     onRemoveButtonPress: (id: number) => void,
 };
 
-export function ImageBoxConfirm({id, url, width, height, description = 'hehh heh description', onAcceptButtonPress, onRemoveButtonPress}: ImageBoxConfirmProps) {
+export function ImageBoxConfirm(this: any, {id, url, width, height, description = 'hehh heh description', onAcceptButtonPress, onRemoveButtonPress}: ImageBoxConfirmProps) {
     const onRegenerateButton = () => {
         console.log('Regenerate button' + id);
         setText('');
     }
 
+    const textInputRef = useRef<TextInput>(null);
     const onEditButtonPress = () => {
         console.log('Edit button' + id);
         setText(text + "0");
+        if (textInputRef.current) {
+            // textInputRef.current = true;
+            textInputRef.current.focus();
+        }
+    }
+    const onEditingFinished = () => {
+        if (textInputRef.current) {
+            textInputRef.current.blur();
+        }
     }
 
     const [text, setText] = useState<string>(description);
@@ -44,9 +55,14 @@ export function ImageBoxConfirm({id, url, width, height, description = 'hehh heh
             </View>
             <ThemedImage url={url} width={width} height={height}/>
 
-            <ThemedText>
-                {text}
-            </ThemedText>
+            <ThemedTextInput
+                useConfirmStyle={true}
+                placeholder={''}
+                value={text}
+                onChangeText={setText}
+                onSubmitEditing={onEditingFinished}
+                ref={textInputRef}>
+            </ThemedTextInput>
 
             <ThemedButton onPress={onRegenerateButton}>
                 <IconSymbol name='repeat'></IconSymbol>

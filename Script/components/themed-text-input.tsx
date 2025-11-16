@@ -10,17 +10,21 @@ export type ThemedTextInputProps = TextInputProps & {
     onSubmitEditing?: () => void,
     clearTextOnFocus?: boolean,
     ref?: Ref<TextInput>,
+    useConfirmStyle?: boolean,
+    defaultValue?: string,
 };
 
-export function ThemedTextInput({ placeholder, style, clearTextOnFocus = false, onChangeText, onSubmitEditing, ref, children }: ThemedTextInputProps) {
+export function ThemedTextInput({ placeholder, style, clearTextOnFocus = false, onChangeText, onSubmitEditing, ref, useConfirmStyle = false, defaultValue = '', children }: ThemedTextInputProps) {
     return(
-        <TextInput 
+        <TextInput
             placeholder={placeholder}
             placeholderTextColor={Colors.default.background}
-            style={[styles.default, style]}
-            autoComplete={'off'}
+            defaultValue={useConfirmStyle ? defaultValue : ''}
+            style={useConfirmStyle ? [styles.alternate, style] : [styles.default, style]}
+            autoComplete='off'
             clearTextOnFocus={clearTextOnFocus}
-            maxLength={20}
+            multiline={useConfirmStyle}
+            maxLength={useConfirmStyle ? undefined : 20}
             onChangeText={(text) => onChangeText(text)}
             onSubmitEditing={onSubmitEditing}
             ref={ref}>
@@ -31,7 +35,7 @@ export function ThemedTextInput({ placeholder, style, clearTextOnFocus = false, 
 const styles = StyleSheet.create({
     default: {
         fontSize: 16,
-        lineHeight: 24,
+        lineHeight: 20,
         //keyboardType: email-address
         // max length
         // max lines
@@ -44,5 +48,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         flex: 1,
+        height: 40,
     },
+    alternate: {
+        fontSize: 16,
+        lineHeight: 20,
+        alignItems: 'center',
+        alignContent: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        flex: 1,
+        textAlign: 'center',
+    }
 });
