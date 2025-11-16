@@ -9,14 +9,20 @@ import {ThemedButton} from "@/components/ui/themed-button";
 import {IconSymbol} from "@/components/ui/icon-symbol";
 import {Colors} from "@/constants/theme";
 
+export let currentUsername: string = '';
+
 export default function LoginScreen() {
     const router = useRouter();
 
     const logIn = (username: string, password: string) => {
-        const valid = true; // TODO call Amalia's method!
+        const valid = username != ''; // TODO call Amalia's method!
         console.log("Login attempt with: " + username + " " + password);
         if (valid) {
             router.replace('/home');
+            currentUsername = username;
+        }
+        else {
+            console.log("bad username");
         }
         // TODO error message saying no
     }

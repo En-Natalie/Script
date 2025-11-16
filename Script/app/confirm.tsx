@@ -8,6 +8,7 @@ import { globalImages } from "@/app/input";
 import { upload, UploadApiOptions} from 'cloudinary-react-native';
 import { Cloudinary } from '@cloudinary/url-gen';
 import {Colors} from "@/constants/theme";
+import {currentUsername} from "@/app/index";
 
 export type ImageCBuilder = {
     url: string;
@@ -42,8 +43,7 @@ export default function ConfirmScreen() {
     const uploadToCloudinary = async (uri: string, description: string) => {
         console.log("uploading to cloudainary...");
 
-        const username = 'username_here';
-        options.metadata = 'username=' + username + '|description=' + description;
+        options.metadata = 'username=' + currentUsername + '|description=' + description;
 
         await upload(cloudinary, {
             file: uri ,
