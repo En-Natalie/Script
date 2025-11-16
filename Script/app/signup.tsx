@@ -7,6 +7,7 @@ import UserPassInput from "@/components/ui/user-pass-input";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedButton } from "@/components/ui/themed-button";
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import {Colors} from "@/constants/theme";
 
 export default function SignupScreen() {
     const router = useRouter();
@@ -21,7 +22,7 @@ export default function SignupScreen() {
     }
 
     return (
-        <ScrollView stickyHeaderIndices={[0]} automaticallyAdjustKeyboardInsets={true}>
+        <ScrollView stickyHeaderIndices={[0]} automaticallyAdjustKeyboardInsets={true} style={{backgroundColor: Colors.default.background}}>
             <Header title='Sign Up' backPath='/signup' ></Header>
             <ThemedView color='background'>
 

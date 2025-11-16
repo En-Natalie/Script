@@ -9,6 +9,7 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router'
 import {getImageAsync} from "expo-clipboard";
+import {Colors} from "@/constants/theme";
 
 export type ImageBuilder = {
     url: string;
@@ -99,7 +100,7 @@ export default function InputScreen() {
 
     return (
         <View style={{flex: 1}}>
-            <ScrollView stickyHeaderIndices={[0]} style={{ flex: 1, flexGrow: 2 }}>
+            <ScrollView stickyHeaderIndices={[0]} style={{ flex: 1, flexGrow: 2, backgroundColor: Colors.default.background}}>
                 <Header title='Input' backPath='/home' style={{flex: 1}}></Header>
                 <ThemedView color='background'>
                     {imageBoxes}

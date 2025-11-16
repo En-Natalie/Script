@@ -3,10 +3,11 @@ import { ThemedView } from '@/components/themed-view';
 import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
 import { ScrollView } from 'react-native';
+import {Colors} from "@/constants/theme";
 
 export default function CreditsScreen() {
     return (
-        <ScrollView stickyHeaderIndices={[0]}>
+        <ScrollView stickyHeaderIndices={[0]} style={{backgroundColor: Colors.default.background}}>
             <Header title='Credits' backPath='/home'></Header>
             <ThemedView color='background'>
             

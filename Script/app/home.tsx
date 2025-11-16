@@ -31,7 +31,7 @@ export default function HomeScreen() {
     />
 
     return (
-        <ScrollView stickyHeaderIndices={[0]}>
+        <ScrollView stickyHeaderIndices={[0]} style={{backgroundColor: Colors.default.background}}>
             <Header title='Home' backPath='/home'></Header>
             <ThemedView color='background'>
 

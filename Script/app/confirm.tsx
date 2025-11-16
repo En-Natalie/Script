@@ -7,6 +7,7 @@ import { useRouter} from "expo-router";
 import { globalImages } from "@/app/input";
 import { upload, UploadApiOptions} from 'cloudinary-react-native';
 import { Cloudinary } from '@cloudinary/url-gen';
+import {Colors} from "@/constants/theme";
 
 export type ImageCBuilder = {
     url: string;
@@ -76,6 +77,10 @@ export default function ConfirmScreen() {
 
         console.log(converted);
         setImages(converted);
+
+        if (converted.length === 0) {
+            router.navigate('/results')
+        }
     }, [setImages]);
 
     const handleAccept = (id: number, updatedDescription: string) => {
@@ -118,7 +123,7 @@ export default function ConfirmScreen() {
     );
 
     return (
-        <ScrollView stickyHeaderIndices={[0]} automaticallyAdjustKeyboardInsets={true}>
+        <ScrollView stickyHeaderIndices={[0]} automaticallyAdjustKeyboardInsets={true} style={{backgroundColor: Colors.default.background}}>
             <Header title='Confirm' backPath='/home'></Header>
             <ThemedView color='background'>
 

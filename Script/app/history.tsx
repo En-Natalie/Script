@@ -10,6 +10,7 @@ import ImageBoxView from "@/components/ui/image-box-view";
 import {acceptedImages, ImageCBuilder, resetAcceptedImages} from './confirm'
 import {AdvancedImage} from "cloudinary-react-native";
 import {Cloudinary} from "@cloudinary/url-gen";
+import {Colors} from "@/constants/theme";
 
 export type ImageBuilder = {
     url: string;
@@ -63,7 +64,7 @@ export default function HistoryScreen() {
     return (
         <View style={{flex: 1}}>
 
-            <ScrollView stickyHeaderIndices={[0]}>
+            <ScrollView stickyHeaderIndices={[0]} style={{backgroundColor: Colors.default.background}}>
                 <Header title='History' backPath='/home'></Header>
                 <ThemedView color='background'>
                     {imageBoxes}

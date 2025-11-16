@@ -49,7 +49,7 @@ export default function ResultsScreen() {
     return (
         <View style={{flex: 1}}>
 
-            <ScrollView stickyHeaderIndices={[0]}>
+            <ScrollView stickyHeaderIndices={[0]} style={{backgroundColor: Colors.default.background}}>
                 <Header title='Results' backPath='/home'></Header>
                 <ThemedView color='background'>
                     {imageBoxes}
