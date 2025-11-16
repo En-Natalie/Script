@@ -1,5 +1,5 @@
 import { Container } from '@/components/ui/container';
-import { Constants } from '@/constants/theme';
+import {Colors, Constants} from '@/constants/theme';
 import { StyleSheet } from 'react-native';
 import { ThemedText } from '../themed-text';
 import { ThemedButton } from './themed-button';
@@ -7,33 +7,23 @@ import { IconSymbol } from './icon-symbol';
 import { ThemedImage } from "@/components/themed-image";
 import { setStringAsync} from "expo-clipboard";
 import * as MediaLibrary from "expo-media-library";
+import {AdvancedImage} from "cloudinary-react-native";
+import {Cloudinary} from "@cloudinary/url-gen";
+import {PropsWithChildren} from "react";
 
-export type ImageBoxViewProps = {
-    id: number,
-    url: string,
-    width: number,
-    height: number,
+
+export type ImageBoxHistoryProps = {
     description: string,
 };
 
-export async function base64File(url: string) {
-    const data = await fetch(url);
-    const blob = await data.blob();
-    return new Promise(resolve => {
-        const reader = new FileReader();
-        reader.readAsDataURL(blob);
-        reader.onloadend = () => {
-            const base64data = reader.result;
-            resolve(base64data);
-        };
-    });
-}
-
-function ImageBoxView({ id, url, width, height, description }: ImageBoxViewProps) {
+function ImageBoxHistory({ description, children }: ImageBoxHistoryProps & PropsWithChildren) {
 
     const saveImage = () => {
         console.log('saving image...');
-        MediaLibrary.saveToLibraryAsync(url).then(r => console.log("image saved!: " + r));
+        console.log('yeah this method does nothing right now lmao')
+
+        // MediaLibrary.saveToLibraryAsync(children.)
+        // MediaLibrary.saveToLibraryAsync(url).then(r => console.log("image saved!: " + r));
     }
 
     const copyText = async () => {
@@ -42,19 +32,17 @@ function ImageBoxView({ id, url, width, height, description }: ImageBoxViewProps
 
     return (
         <Container>
-            <ThemedImage url={url} width={width} height={height}/>
+            { children }
 
             <ThemedText>
                 {description}
             </ThemedText>
-            
-            {/*<ThemedView color='container' style={styles.imageButtons} >*/}
+
             <ThemedButton onPress={saveImage}>
                 <IconSymbol name='square.and.arrow.down'></IconSymbol>
                 <ThemedText>Save Image</ThemedText>
             </ThemedButton>
-            {/*</ThemedView>*/}
-            
+
             <ThemedButton onPress={copyText}>
                 <IconSymbol name='doc.on.clipboard'></IconSymbol>
                 <ThemedText>Copy ID Text</ThemedText>
@@ -63,7 +51,7 @@ function ImageBoxView({ id, url, width, height, description }: ImageBoxViewProps
     );
 }
 
-export default ImageBoxView
+export default ImageBoxHistory
 
 const styles = StyleSheet.create({
     imageButtons: {

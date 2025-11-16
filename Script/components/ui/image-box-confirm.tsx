@@ -29,7 +29,6 @@ export function ImageBoxConfirm(this: any, {id, url, width, height, description 
         console.log('Edit button' + id);
         setText(text + "0");
         if (textInputRef.current) {
-            // textInputRef.current = true;
             textInputRef.current.focus();
         }
     }

@@ -9,6 +9,7 @@ import { upload, UploadApiOptions} from 'cloudinary-react-native';
 import { Cloudinary } from '@cloudinary/url-gen';
 import {Colors} from "@/constants/theme";
 import {currentUsername} from "@/app/index";
+import {storeImage} from "@/functionality/data-storage";
 
 export type ImageCBuilder = {
     url: string;
@@ -46,11 +47,36 @@ export default function ConfirmScreen() {
         options.metadata = 'username=' + currentUsername + '|description=' + description;
 
         await upload(cloudinary, {
-            file: uri ,
+            file: uri,
             options: options,
             callback: (error: any, response: any) => {
                 console.log("error: " + error);
                 console.log("response: " + response);
+                console.log("response stringify " + JSON.stringify(response))
+                console.log("response PUBLIC ID: " + response.public_id)
+                storeImage(currentUsername, response.public_id, description, response.width, response.height);
+
+                /* the response:
+                "asset_id":"d43b1cdd929839490ed83ef4d77b6e11",
+                "public_id":"yzx9ixx3cwwwwjb0mr2t",
+                "version":1763329669,
+                "version_id":"b2202cc1c90fe288bd6513aa6db49cdc",
+                "signature":"4d680c8086d7385801cd172f983fb334db8e9aa1",
+                "width":640,
+                "height":1136
+                ,"format":"png",
+                "resource_type":"image",
+                "created_at":"2025-11-16T21:47:49Z","tags":[],
+                "bytes":65593,"type":"upload",
+                "etag":"d2bc8e7384e4db354ffeb7b078796531",
+                "placeholder":false,
+                "url":"http://res.cloudinary.com/script-cs/image/upload/v1763329669/yzx9ixx3cwwwwjb0mr2t.png",
+                "secure_url":"https://res.cloudinary.com/script-cs/image/upload/v1763329669/yzx9ixx3cwwwwjb0mr2t.png",
+                "asset_folder":"",
+                "display_name":"file",
+                "metadata":{"description":"Insert image description here","username":"A"},
+                "original_filename":"file"}
+                 */
             }
         })
 
