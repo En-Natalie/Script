@@ -5,6 +5,11 @@
 
 import { Platform } from 'react-native';
 import { SymbolViewProps } from 'expo-symbols';
+import {Theme} from "@react-navigation/native";
+
+// import type { Theme } from '../types';
+// import { fonts } from './fonts';
+// import { fonts } from './fonts';
 
 const tintColorLight = '#0a7ea4';
 const tintColorDark = '#fff';
