@@ -7,6 +7,7 @@ import { IconSymbol } from './icon-symbol';
 import { ThemedView } from '../themed-view';
 import { ThemedImage } from "@/components/themed-image";
 import {setImageAsync, setStringAsync} from "expo-clipboard";
+import * as MediaLibrary from "expo-media-library";
 
 export type ImageBoxViewProps = {
     id: number,
@@ -20,7 +21,8 @@ export type ImageBoxViewProps = {
 function ImageBoxView({ id, url, width, height, description }: ImageBoxViewProps) {
 
     const saveImage = () => {
-
+        console.log('saving image...');
+        MediaLibrary.saveToLibraryAsync(url).then(r => console.log("image saved!: " + r));
     }
 
     const copyImage = async () => {

@@ -34,7 +34,7 @@ export default function HistoryScreen() {
         }
     });
 
-    const router = useRouter();
+
 
     const [images, setImages] = useState<ImageCBuilder[]>([
         // {
@@ -53,7 +53,7 @@ export default function HistoryScreen() {
     const imageBoxes = images.map(ib =>
         <Fragment key={ib.id}>
             <AdvancedImage
-                cldImg={cloudinary.image('Screenshot_2025-09-26_at_9.40.51_PM_jox13m')}
+                cldImg={cloudinary.image('jssgqpcmexr5lt1738i8')}
                 style={{
                     width: 200,
                     height: 100,
@@ -67,6 +67,12 @@ export default function HistoryScreen() {
             <ScrollView stickyHeaderIndices={[0]} style={{backgroundColor: Colors.default.background}}>
                 <Header title='History' backPath='/home'></Header>
                 <ThemedView color='background'>
+                    <AdvancedImage
+                        cldImg={cloudinary.image('jssgqpcmexr5lt1738i8')}
+                        style={{
+                            width: 200,
+                            height: 100,
+                            alignSelf: 'center'}} />
                     {imageBoxes}
                 </ThemedView>
             </ScrollView>
