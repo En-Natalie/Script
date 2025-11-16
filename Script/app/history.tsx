@@ -4,7 +4,7 @@ import { Header } from '@/components/ui/header';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ThemedButton } from '@/components/ui/themed-button';
 import {Fragment, useEffect, useState} from 'react';
-import { ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import { useRouter } from 'expo-router'
 import ImageBoxView from "@/components/ui/image-box-view";
 import {acceptedImages, ImageCBuilder, resetAcceptedImages} from './confirm'
@@ -61,21 +61,22 @@ export default function HistoryScreen() {
     );
 
     return (
-        <ScrollView stickyHeaderIndices={[0]}>
-            <Header title='History' backPath='/home'></Header>
-            <ThemedView color='background'>
-                {imageBoxes}
-            </ThemedView>
+        <View style={{flex: 1}}>
 
-            <ThemedView color='accent' style={styles.buttonMenu}>
+            <ScrollView stickyHeaderIndices={[0]}>
+                <Header title='History' backPath='/home'></Header>
+                <ThemedView color='background'>
+                    {imageBoxes}
+                </ThemedView>
+            </ScrollView>
 
-                <ThemedButton onPress={() => { resetAcceptedImages(); router.dismissTo({pathname: '/home'})  }}>
-                    <IconSymbol name='house.fill'></IconSymbol>
-                    <ThemedText>Done</ThemedText>
-                </ThemedButton>
-
-            </ThemedView>
-        </ScrollView>
+            {/*<ThemedView color='accent' style={styles.buttonMenu}>*/}
+            {/*    <ThemedButton onPress={() => { resetAcceptedImages(); router.dismissTo({pathname: '/home'})  }}>*/}
+            {/*        <IconSymbol name='house.fill'></IconSymbol>*/}
+            {/*        <ThemedText>Done</ThemedText>*/}
+            {/*    </ThemedButton>*/}
+            {/*</ThemedView>*/}
+        </View>
     )
 }
 
@@ -89,5 +90,8 @@ const styles = StyleSheet.create({
         outlineWidth: 2,
         outlineColor: '#000',
         padding: 10,
+        height: 20,
+        minHeight: 20,
+        flex: 0.10,
     },
 });
