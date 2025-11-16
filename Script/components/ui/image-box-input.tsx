@@ -2,7 +2,7 @@ import { Container } from '@/components/ui/container';
 import { ThemedText } from '../themed-text';
 import { ThemedButton } from './themed-button';
 import { IconSymbol } from './icon-symbol';
-import {ThemedImage} from "@/components/themed-image";
+import { ThemedImage } from "@/components/themed-image";
 
 export type ImageBoxInputProps = {
     id: number,

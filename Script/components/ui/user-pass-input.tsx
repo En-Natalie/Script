@@ -1,9 +1,9 @@
 import { ThemedTextInput } from '@/components/themed-text-input';
-import {PropsWithChildren, useRef, useState} from 'react'
-import {ThemedText} from "@/components/themed-text";
-import {IconSymbol} from "@/components/ui/icon-symbol";
-import {ThemedButton} from "@/components/ui/themed-button";
-import {TextInput} from "react-native";
+import { PropsWithChildren, useRef, useState } from 'react'
+import { ThemedText } from "@/components/themed-text";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { ThemedButton } from "@/components/ui/themed-button";
+import { TextInput } from "react-native";
 
 export type UserPassInputProps = {
     onSubmitEditing: (username: string, password: string) => void,

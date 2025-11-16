@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context';
 import { IconSymbol } from './icon-symbol';
 import { SFSymbols6_0 } from 'sf-symbols-typescript';
-import {ThemedButton} from "@/components/ui/themed-button";
+import { ThemedButton } from "@/components/ui/themed-button";
 
 export type HeaderProps = {
     title?: string,

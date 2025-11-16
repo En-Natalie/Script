@@ -5,11 +5,11 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ImageBoxInput } from '@/components/ui/image-box-input';
 import { ThemedButton } from '@/components/ui/themed-button';
 import { Fragment, useState } from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router'
-import {getImageAsync} from "expo-clipboard";
-import {Colors} from "@/constants/theme";
+import { getImageAsync } from "expo-clipboard";
+import { Colors } from "@/constants/theme";
 
 export type ImageBuilder = {
     url: string;
@@ -147,15 +147,6 @@ const styles = StyleSheet.create({
         height: 50,
         minHeight: 50,
         flex: 0.25,
-        // flexGrow: 1,
-
-        // position: 'absolute',
-        // // marginTop: 'auto',
-        // // marginBottom: 100,
-        // bottom: -500,
-        // // paddingBottom: 400,
-        // bottom: 100, // TODO this is bad lmao
-        // width: '100%'
     },
     verticalButtonMenu: {
         flexDirection: 'column',

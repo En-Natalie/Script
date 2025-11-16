@@ -3,7 +3,7 @@ import { ThemedView } from '@/components/themed-view';
 import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
 import { ScrollView } from 'react-native';
-import {Colors} from "@/constants/theme";
+import { Colors } from "@/constants/theme";
 
 export default function CreditsScreen() {
     return (

@@ -21,8 +21,3 @@ export function ThemedView({ color = 'background', style, children }: ThemedView
     </View>
   );
 }
-
-// backgroundColor === 'containerBackground' ? styles.container : undefined,
-// backgroundColor === 'buttonBackground' ? styles.button : undefined,
-// backgroundColor === 'background' ? styles.background : undefined,
-// backgroundColor === 'accent' ? styles.accent : undefined,

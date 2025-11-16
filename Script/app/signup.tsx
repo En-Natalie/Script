@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, View} from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { ThemedView } from '@/components/themed-view';
 import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
@@ -7,9 +7,9 @@ import UserPassInput from "@/components/ui/user-pass-input";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedButton } from "@/components/ui/themed-button";
 import { IconSymbol } from "@/components/ui/icon-symbol";
-import {Colors} from "@/constants/theme";
+import { Colors } from "@/constants/theme";
 import { setCurrentUsername} from "@/app/index";
-import {useState} from "react";
+import { useState } from "react";
 
 export default function SignupScreen() {
     const router = useRouter();

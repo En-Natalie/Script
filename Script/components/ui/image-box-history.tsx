@@ -4,12 +4,8 @@ import { StyleSheet } from 'react-native';
 import { ThemedText } from '../themed-text';
 import { ThemedButton } from './themed-button';
 import { IconSymbol } from './icon-symbol';
-import { ThemedImage } from "@/components/themed-image";
 import { setStringAsync} from "expo-clipboard";
-import * as MediaLibrary from "expo-media-library";
-import {AdvancedImage} from "cloudinary-react-native";
-import {Cloudinary} from "@cloudinary/url-gen";
-import {PropsWithChildren} from "react";
+import { PropsWithChildren } from "react";
 
 
 export type ImageBoxHistoryProps = {
@@ -18,13 +14,13 @@ export type ImageBoxHistoryProps = {
 
 function ImageBoxHistory({ description, children }: ImageBoxHistoryProps & PropsWithChildren) {
 
-    const saveImage = () => {
-        console.log('saving image...');
-        console.log('yeah this method does nothing right now lmao')
-
-        // MediaLibrary.saveToLibraryAsync(children.)
-        // MediaLibrary.saveToLibraryAsync(url).then(r => console.log("image saved!: " + r));
-    }
+    // const saveImage = () => {
+    //     console.log('saving image...');
+    //     console.log('yeah this method does nothing right now lmao')
+    //
+    //     // MediaLibrary.saveToLibraryAsync(children.)
+    //     // MediaLibrary.saveToLibraryAsync(url).then(r => console.log("image saved!: " + r));
+    // }
 
     const copyText = async () => {
         await setStringAsync(description)
@@ -52,16 +48,3 @@ function ImageBoxHistory({ description, children }: ImageBoxHistoryProps & Props
 }
 
 export default ImageBoxHistory
-
-const styles = StyleSheet.create({
-    imageButtons: {
-        flexDirection: 'row',
-        borderRadius: Constants.default.borderRadius,
-        alignItems: 'center',
-        alignContent: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        flex: 1,
-        gap: 10,
-    },
-});

@@ -1,4 +1,4 @@
-import {StyleSheet, ScrollView, Text, View} from 'react-native';
+import {StyleSheet, ScrollView, View} from 'react-native';
 import { ThemedView } from '@/components/themed-view';
 import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
@@ -7,8 +7,8 @@ import UserPassInput from "@/components/ui/user-pass-input";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedButton } from "@/components/ui/themed-button";
 import { IconSymbol } from "@/components/ui/icon-symbol";
-import { Colors, Constants } from "@/constants/theme";
-import {useState } from "react";
+import { Colors } from "@/constants/theme";
+import { useState } from "react";
 
 export let currentUsername: string = '';
 export function setCurrentUsername(username: string): void { currentUsername = username; }

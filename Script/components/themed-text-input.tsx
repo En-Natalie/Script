@@ -1,7 +1,7 @@
 import { Colors, Constants } from '@/constants/theme';
 import { StyleSheet, TextInput, type TextInputProps } from 'react-native';
 
-import {Ref} from "react";
+import { Ref } from "react";
 
 export type ThemedTextInputProps = TextInputProps & {
     placeholder: string,
@@ -36,9 +36,6 @@ const styles = StyleSheet.create({
     default: {
         fontSize: 16,
         lineHeight: 20,
-        //keyboardType: email-address
-        // max length
-        // max lines
         padding: 5,
         borderRadius: Constants.default.borderRadius,
         outlineColor: Colors.default.border,
