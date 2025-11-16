@@ -1,5 +1,5 @@
 import { Container } from '@/components/ui/container';
-import {Colors, Constants} from '@/constants/theme';
+import { Constants} from '@/constants/theme';
 import { StyleSheet } from 'react-native';
 import { ThemedText } from '../themed-text';
 import { ThemedButton } from './themed-button';
@@ -38,10 +38,10 @@ function ImageBoxHistory({ description, children }: ImageBoxHistoryProps & Props
                 {description}
             </ThemedText>
 
-            <ThemedButton onPress={saveImage}>
-                <IconSymbol name='square.and.arrow.down'></IconSymbol>
-                <ThemedText>Save Image</ThemedText>
-            </ThemedButton>
+            {/*<ThemedButton onPress={saveImage}>*/}
+            {/*    <IconSymbol name='square.and.arrow.down'></IconSymbol>*/}
+            {/*    <ThemedText>Save Image</ThemedText>*/}
+            {/*</ThemedButton>*/}
 
             <ThemedButton onPress={copyText}>
                 <IconSymbol name='doc.on.clipboard'></IconSymbol>
