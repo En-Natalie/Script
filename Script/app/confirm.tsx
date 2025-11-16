@@ -7,12 +7,12 @@ import { useRouter} from "expo-router";
 import { globalImages } from "@/app/input";
 import { upload, UploadApiOptions} from 'cloudinary-react-native';
 import { Cloudinary } from '@cloudinary/url-gen';
-import {Colors} from "@/constants/theme";
-import {currentUsername} from "@/app/index";
-import {storeImage} from "@/functionality/data-storage";
+import { Colors } from "@/constants/theme";
+import { currentUsername } from "@/app/index";
+import { storeImage } from "@/functionality/data-storage";
 
 export type ImageCBuilder = {
-    url: string;
+    uri: string;
     id: number;
     width: number;
     height: number;
@@ -37,7 +37,6 @@ export default function ConfirmScreen() {
     const options: UploadApiOptions = {
         upload_preset: 'default_upload',
         unsigned: true,
-        // image_metadata: true,
         metadata: 'username=rahh|description=green'
     }
 
@@ -86,7 +85,7 @@ export default function ConfirmScreen() {
     const router = useRouter();
 
     const [images, setImages] = useState<ImageCBuilder[]>([{ // a temp loading image
-        url: '@/assets/images/favicon.png',
+        uri: '@/assets/images/favicon.png',
         id: 0,
         width: 100,
         height: 50,
@@ -97,7 +96,7 @@ export default function ConfirmScreen() {
         const converted: ImageCBuilder[] = [];
 
         globalImages.forEach(i => converted.push({
-            url: i.url,
+            uri: i.uri,
             id: i.id,
             width: i.width,
             height: i.height,
@@ -118,7 +117,7 @@ export default function ConfirmScreen() {
             console.log("accepted image found!");
             acceptedImage.description = updatedDescription;
             acceptedImages.push(acceptedImage);
-            uploadToCloudinary(acceptedImage.url, updatedDescription);
+            uploadToCloudinary(acceptedImage.uri, updatedDescription);
         }
         else {
             console.log("accepted image NOT found :(");
@@ -143,7 +142,7 @@ export default function ConfirmScreen() {
         <Fragment key={ib.id}>
             <ImageBoxConfirm
                 id={ib.id}
-                url={ib.url}
+                uri={ib.uri}
                 width={ib.width}
                 height={ib.height}
                 onAcceptButtonPress={handleAccept}

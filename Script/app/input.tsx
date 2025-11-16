@@ -12,7 +12,7 @@ import { getImageAsync } from "expo-clipboard";
 import { Colors } from "@/constants/theme";
 
 export type ImageBuilder = {
-    url: string;
+    uri: string;
     id: number;
     width: number;
     height: number;
@@ -35,7 +35,7 @@ export default function InputScreen() {
             const newImages: ImageBuilder[] = images.slice(); // why .slice? react only triggers a rerender if the memory address of the array in the state changes
 
             newImages.push({
-                url: image.data,
+                uri: image.data,
                 id: nextId,
                 height: image.size.height,
                 width: image.size.width,
@@ -66,7 +66,7 @@ export default function InputScreen() {
             // add to newImages array, increment id
             for (let i = 0; i < result.assets.length; i++) {
                 newImages.push({
-                    url: result.assets[i].uri,
+                    uri: result.assets[i].uri,
                     id: nextId + 1 + i,
                     width: result.assets[i].width,
                     height: result.assets[i].height,
@@ -90,7 +90,7 @@ export default function InputScreen() {
         <Fragment key={ib.id}>
             <ImageBoxInput
                 id={ib.id}
-                url={ib.url}
+                uri={ib.uri}
                 width={ib.width}
                 height={ib.height}
                 onRemoveButtonPress={handleRemove}>

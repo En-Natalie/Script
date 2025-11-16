@@ -1,5 +1,5 @@
 import { StyleSheet, Text, type TextProps } from 'react-native';
-import { Colors} from "@/constants/theme";
+import { Colors } from "@/constants/theme";
 
 import { useThemeColor } from '@/hooks/use-theme-color';
 
@@ -48,9 +48,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
         lineHeight: 20,
         color: Colors.default.error,
-        // fontWeight: 'bold',
-        // fontStyle: 'italic',
-        // textAlign: 'center',
     },
   
     title: {

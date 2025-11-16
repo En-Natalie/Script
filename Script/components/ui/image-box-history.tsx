@@ -1,6 +1,4 @@
 import { Container } from '@/components/ui/container';
-import { Constants} from '@/constants/theme';
-import { StyleSheet } from 'react-native';
 import { ThemedText } from '../themed-text';
 import { ThemedButton } from './themed-button';
 import { IconSymbol } from './icon-symbol';
@@ -19,7 +17,7 @@ function ImageBoxHistory({ description, children }: ImageBoxHistoryProps & Props
     //     console.log('yeah this method does nothing right now lmao')
     //
     //     // MediaLibrary.saveToLibraryAsync(children.)
-    //     // MediaLibrary.saveToLibraryAsync(url).then(r => console.log("image saved!: " + r));
+    //     // MediaLibrary.saveToLibraryAsync(uri).then(r => console.log("image saved!: " + r));
     // }
 
     const copyText = async () => {
@@ -34,7 +32,7 @@ function ImageBoxHistory({ description, children }: ImageBoxHistoryProps & Props
                 {description}
             </ThemedText>
 
-            {/*<ThemedButton onPress={saveImage}>*/}
+            {/*<ThemedButton>*/}
             {/*    <IconSymbol name='square.and.arrow.down'></IconSymbol>*/}
             {/*    <ThemedText>Save Image</ThemedText>*/}
             {/*</ThemedButton>*/}

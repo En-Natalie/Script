@@ -3,26 +3,19 @@ import { ThemedView } from '@/components/themed-view';
 import { Header } from '@/components/ui/header';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ThemedButton } from '@/components/ui/themed-button';
-import {Fragment, useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import { Fragment, useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { useRouter } from 'expo-router'
 import ImageBoxView from "@/components/ui/image-box-view";
-import {acceptedImages, ImageCBuilder, resetAcceptedImages} from './confirm'
-import {Colors} from "@/constants/theme";
-
-export type ImageBuilder = {
-    url: string;
-    id: number;
-    width: number;
-    height: number;
-}
+import { acceptedImages, ImageCBuilder, resetAcceptedImages } from './confirm'
+import { Colors } from "@/constants/theme";
 
 export default function ResultsScreen() {
     const router = useRouter();
 
     const [images, setImages] = useState<ImageCBuilder[]>([
         {
-            url: "asdfasdf",
+            uri: "asdfasdf",
             id: 100,
             width: 20,
             height: 20,
@@ -37,8 +30,7 @@ export default function ResultsScreen() {
     const imageBoxes = images.map(ib =>
         <Fragment key={ib.id}>
             <ImageBoxView
-                id={ib.id}
-                url={ib.url}
+                uri={ib.uri}
                 width={ib.width}
                 height={ib.height}
                 description={ib.description}>

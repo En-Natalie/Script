@@ -10,7 +10,7 @@ import { ThemedTextInput } from "@/components/themed-text-input";
 
 export type ImageBoxConfirmProps = {
     id: number,
-    url: string,
+    uri: string,
     width: number,
     height: number,
     description: string,
@@ -18,7 +18,7 @@ export type ImageBoxConfirmProps = {
     onRemoveButtonPress: (id: number) => void,
 };
 
-export function ImageBoxConfirm(this: any, {id, url, width, height, description = 'hehh heh description', onAcceptButtonPress, onRemoveButtonPress}: ImageBoxConfirmProps) {
+export function ImageBoxConfirm(this: any, {id, uri, width, height, description = 'hehh heh description', onAcceptButtonPress, onRemoveButtonPress}: ImageBoxConfirmProps) {
     const onRegenerateButton = () => {
         console.log('Regenerate button' + id);
         setText('');
@@ -52,7 +52,7 @@ export function ImageBoxConfirm(this: any, {id, url, width, height, description 
                     <ThemedText>Approve</ThemedText>
                 </ThemedButton>
             </View>
-            <ThemedImage url={url} width={width} height={height}/>
+            <ThemedImage uri={uri} width={width} height={height}/>
 
             <ThemedTextInput
                 useConfirmStyle={true}

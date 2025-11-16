@@ -2,12 +2,12 @@ import { Colors, Constants } from '@/constants/theme';
 import { Image, ImageProps } from 'react-native';
 
 export type ThemedImageProps = {
-    url: string;
+    uri: string;
     width: number;
     height: number;
 };
 
-export function ThemedImage({url, width, height, style}: ThemedImageProps & ImageProps) {
+export function ThemedImage({uri, width, height, style}: ThemedImageProps & ImageProps) {
     const aspectRatio = width / height;
 
     return (
@@ -21,10 +21,8 @@ export function ThemedImage({url, width, height, style}: ThemedImageProps & Imag
             width: '100%',
             aspectRatio: aspectRatio,
         }, style]}
-        // source={require('@/assets/images/favicon.png')} // previous thing
-        source={{ uri: url }}
+        // source={require('@/assets/images/favicon.png')} // alternate method,
+        source={{ uri: uri }}
         />
     );
 }
-
-// <Image source={{ uri: image }} style={styles.image} />
