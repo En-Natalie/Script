@@ -131,40 +131,6 @@ export default function InputScreen() {
             </ThemedView>
         </View>
     )
-
-    return (
-        <ScrollView stickyHeaderIndices={[0]}>
-            <Header title='Input' backPath='/home'></Header>
-            <ThemedView color='background' style={{ flexGrow: 1 }}>
-                {imageBoxes}
-            </ThemedView>
-
-            {/* Button menu */}
-            <ThemedView color='accent' style={styles.buttonMenu}>
-                <ThemedView color='accent' style={styles.verticalButtonMenu}>
-                    <ThemedButton onPress={pasteImage}>
-                        <IconSymbol name='doc.on.clipboard'></IconSymbol>
-                        <ThemedText>Paste</ThemedText>
-                    </ThemedButton>
-                    <ThemedButton>
-                        <IconSymbol name='paperclip'></IconSymbol>
-                        <ThemedText>Open Files</ThemedText>
-                    </ThemedButton>
-                    <ThemedButton onPress={openGallery}>
-                        <IconSymbol name='photo.fill.on.rectangle.fill'></IconSymbol>
-                        <ThemedText>Gallery</ThemedText>
-                    </ThemedButton>
-                </ThemedView>
-
-                <ThemedView color='accent'>
-                    <ThemedButton onPress={() => {globalImages = images; router.navigate({pathname: '/confirm', params: { images: images.map(ib => JSON.stringify(ib)) } })}}>
-                        <ThemedText>Continue</ThemedText>
-                        <IconSymbol name='arrow.right'></IconSymbol>
-                    </ThemedButton>
-                </ThemedView>
-            </ThemedView>
-        </ScrollView>
-    )
 }
 
 const styles = StyleSheet.create({
