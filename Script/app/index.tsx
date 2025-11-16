@@ -1,19 +1,22 @@
-import {StyleSheet, ScrollView, Text} from 'react-native';
+import {StyleSheet, ScrollView, Text, View} from 'react-native';
 import { ThemedView } from '@/components/themed-view';
 import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
 import { useRouter } from 'expo-router'
 import UserPassInput from "@/components/ui/user-pass-input";
-import {ThemedText} from "@/components/themed-text";
-import {ThemedButton} from "@/components/ui/themed-button";
-import {IconSymbol} from "@/components/ui/icon-symbol";
-import {Colors} from "@/constants/theme";
+import { ThemedText } from "@/components/themed-text";
+import { ThemedButton } from "@/components/ui/themed-button";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { Colors, Constants } from "@/constants/theme";
+import {useState } from "react";
 
 export let currentUsername: string = '';
 export function setCurrentUsername(username: string): void { currentUsername = username; }
 
 export default function LoginScreen() {
     const router = useRouter();
+
+    const [displayError, setDisplayError] = useState(false);
 
     const logIn = (username: string, password: string) => {
         const valid = username != ''; // TODO call Amalia's method!
@@ -24,8 +27,8 @@ export default function LoginScreen() {
         }
         else {
             console.log("bad username");
+            setDisplayError(true);
         }
-        // TODO error message saying no
     }
 
     return (
@@ -39,7 +42,12 @@ export default function LoginScreen() {
 
                 <Container>
                     <UserPassInput onSubmitEditing={logIn} buttonText={'Log In'}/>
-                    {/*<ThemedText style={styles.errorMessage} type={'error'}>Login failed. Incorrect username or password.</ThemedText>*/}
+                    { displayError &&
+                        <View style={styles.errorContainer}>
+                            <IconSymbol name={'exclamationmark.circle'} style={styles.icon} color={Colors.default.error} size={20}/>
+                            <ThemedText type={'error'}>Invalid username or password, please try again.</ThemedText>
+                        </View>
+                    }
                 </Container>
 
                 <Container>
@@ -54,3 +62,14 @@ export default function LoginScreen() {
         </ScrollView>
     )
 }
+
+const styles = StyleSheet.create({
+    errorContainer: {
+        flexDirection: 'row',
+        paddingHorizontal: 16,
+        gap: 10,
+    },
+    icon: {
+        marginTop: 1,
+    }
+})

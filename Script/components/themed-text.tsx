@@ -45,9 +45,12 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
     },
     error: {
-        fontSize: 16,
-        lineHeight: 24,
-        color: Colors.default.red,
+        fontSize: 15,
+        lineHeight: 20,
+        color: Colors.default.error,
+        // fontWeight: 'bold',
+        // fontStyle: 'italic',
+        // textAlign: 'center',
     },
   
     title: {

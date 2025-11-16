@@ -1,4 +1,4 @@
-import { ScrollView } from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import { ThemedView } from '@/components/themed-view';
 import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
@@ -9,9 +9,12 @@ import { ThemedButton } from "@/components/ui/themed-button";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import {Colors} from "@/constants/theme";
 import { setCurrentUsername} from "@/app/index";
+import {useState} from "react";
 
 export default function SignupScreen() {
     const router = useRouter();
+
+    const [displayError, setDisplayError] = useState(false);
 
     const signUp = (username: string, password: string) => {
         const valid = username != ''; // TODO call Amalia's method!
@@ -22,8 +25,8 @@ export default function SignupScreen() {
         }
         else {
             console.log("bad username");
+            setDisplayError(true);
         }
-        // TODO error message saying no
     }
 
     return (
@@ -37,6 +40,12 @@ export default function SignupScreen() {
 
                 <Container>
                     <UserPassInput onSubmitEditing={signUp} buttonText={'Sign Up'}/>
+                    { displayError &&
+                        <View style={styles.errorContainer}>
+                            <IconSymbol name={'exclamationmark.circle'} style={styles.icon} color={Colors.default.error} size={20}/>
+                            <ThemedText type={'error'}>Invalid username or password, please try again.</ThemedText>
+                        </View>
+                    }
                 </Container>
 
                 <Container>
@@ -51,3 +60,14 @@ export default function SignupScreen() {
         </ScrollView>
     )
 }
+
+const styles = StyleSheet.create({
+    errorContainer: {
+        flexDirection: 'row',
+        paddingHorizontal: 16,
+        gap: 10,
+    },
+    icon: {
+        marginTop: 1,
+    }
+})
