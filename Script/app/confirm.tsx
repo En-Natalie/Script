@@ -1,7 +1,7 @@
 import { ThemedView } from '@/components/themed-view';
 import { Header } from '@/components/ui/header';
 import { ImageBoxConfirm } from '@/components/ui/image-box-confirm';
-import {KeyboardAvoidingView, ScrollView} from 'react-native';
+import { ScrollView} from 'react-native';
 import { Fragment, useEffect, useState} from "react";
 import { useRouter} from "expo-router";
 import { globalImages } from "@/app/input";
@@ -35,18 +35,25 @@ export default function ConfirmScreen() {
     const options: UploadApiOptions = {
         upload_preset: 'default_upload',
         unsigned: true,
+        // image_metadata: true,
         metadata: {
             'username': 'high',
             'description': 'hello world' // TODO this isn't working properly
         },
     }
 
-    const uploadToCloudinary = async (uri: string) => {
+    const uploadToCloudinary = async (uri: string, description: string) => {
         console.log("uploading to cloudainary...");
-        await upload(cloudinary, {file: uri , options: options, callback: (error: any, response: any) => {
+
+        await upload(cloudinary, {
+            file: uri ,
+            options: options,
+            callback: (error: any, response: any) => {
                 console.log("error: " + error);
                 console.log("response: " + response);
-            }})
+            }
+        })
+
         console.log('done uploading!');
 
         upload(cloudinary,{ file: uri, options: options, callback: (error: any, response: any) => {
@@ -87,8 +94,9 @@ export default function ConfirmScreen() {
         const acceptedImage = images.find(i => i.id === id);
         if (acceptedImage) {
             console.log("accepted image found!");
+            acceptedImage.description = updatedDescription;
             acceptedImages.push(acceptedImage);
-            uploadToCloudinary(acceptedImage.url);
+            uploadToCloudinary(acceptedImage.url, updatedDescription);
         }
         else {
             console.log("accepted image NOT found :(");
