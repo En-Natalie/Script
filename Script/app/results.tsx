@@ -8,6 +8,7 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import { useRouter } from 'expo-router'
 import ImageBoxView from "@/components/ui/image-box-view";
 import {acceptedImages, ImageCBuilder, resetAcceptedImages} from './confirm'
+import {Colors} from "@/constants/theme";
 
 export type ImageBuilder = {
     url: string;
@@ -77,6 +78,6 @@ const styles = StyleSheet.create({
         padding: 10,
         height: 60,
         minHeight: 60,
-        flex: 0.10,
+        flex: 0.01,
     },
 });

@@ -78,7 +78,7 @@ export default function ConfirmScreen() {
         setImages(converted);
     }, [setImages]);
 
-    const handleAccept = (id: number) => {
+    const handleAccept = (id: number, updatedDescription: string) => {
         const acceptedImage = images.find(i => i.id === id);
         if (acceptedImage) {
             console.log("accepted image found!");

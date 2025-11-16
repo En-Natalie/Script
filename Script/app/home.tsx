@@ -27,8 +27,7 @@ export default function HomeScreen() {
             width: '100%',
             aspectRatio: aspectRatio,
         }]}
-        source={logoURL} // previous thing
-        // source={{ uri: url }}
+        source={logoURL}
     />
 
     return (

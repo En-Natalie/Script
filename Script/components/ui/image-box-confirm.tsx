@@ -5,8 +5,8 @@ import { StyleSheet, TextInput, View } from 'react-native';
 import { ThemedText } from '../themed-text';
 import { ThemedButton } from './themed-button';
 import { IconSymbol } from './icon-symbol';
-import {ThemedImage } from "@/components/themed-image";
-import {ThemedTextInput } from "@/components/themed-text-input";
+import { ThemedImage } from "@/components/themed-image";
+import { ThemedTextInput } from "@/components/themed-text-input";
 
 export type ImageBoxConfirmProps = {
     id: number,
@@ -14,7 +14,7 @@ export type ImageBoxConfirmProps = {
     width: number,
     height: number,
     description: string,
-    onAcceptButtonPress: (id: number) => void,
+    onAcceptButtonPress: (id: number, updatedDescription: string) => void,
     onRemoveButtonPress: (id: number) => void,
 };
 
@@ -48,7 +48,7 @@ export function ImageBoxConfirm(this: any, {id, url, width, height, description 
                     <IconSymbol name='trash.fill'></IconSymbol>
                     <ThemedText>Remove</ThemedText>
                 </ThemedButton>
-                <ThemedButton color='green' onPress={onAcceptButtonPress.bind(null, id)}>
+                <ThemedButton color='green' onPress={onAcceptButtonPress.bind(null, id, text)}>
                     <IconSymbol name='hand.thumbsup.fill'></IconSymbol>
                     <ThemedText>Approve</ThemedText>
                 </ThemedButton>
@@ -57,8 +57,8 @@ export function ImageBoxConfirm(this: any, {id, url, width, height, description 
 
             <ThemedTextInput
                 useConfirmStyle={true}
-                placeholder={''}
-                value={text}
+                placeholder={'This is a placeholder'}
+                defaultValue={text}
                 onChangeText={setText}
                 onSubmitEditing={onEditingFinished}
                 ref={textInputRef}>
