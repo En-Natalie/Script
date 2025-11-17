@@ -10,6 +10,7 @@ import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
 import { setCurrentUsername} from "@/app/index";
 import { useState } from "react";
+import {signUp} from "@/functionality/login-screen";
 
 /**
  * Screen that allows user to sign up via entering a username and password
@@ -20,8 +21,9 @@ export default function SignupScreen() {
 
     const [displayError, setDisplayError] = useState(false);
 
-    const signUp = (username: string, password: string) => {
-        const valid = username != ''; // TODO call Amalia's method!
+    const asignUp = (username: string, password: string) => {
+        // const valid = username != ''; // TODO call Amalia's method!
+        const valid: boolean = signUp(username, password);
         console.log("Sign up attempt with: " + username + " " + password);
         if (valid) {
             router.replace('/home');
@@ -43,7 +45,7 @@ export default function SignupScreen() {
                 </Container>
 
                 <Container>
-                    <UserPassInput onSubmitEditing={signUp} buttonText={'Sign Up'}/>
+                    <UserPassInput onSubmitEditing={asignUp} buttonText={'Sign Up'}/>
                     { displayError &&
                         <View style={styles.errorContainer}>
                             <IconSymbol name={'exclamationmark.circle'} style={styles.icon} color={Colors.default.error} size={20}/>

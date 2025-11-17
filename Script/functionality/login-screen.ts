@@ -33,17 +33,17 @@ function isPasswordStrong(password: string) {
 }
 
 // ========== SIGN UP ==========
-function signUp(username: any, password: any) {
+export function signUp(username: any, password: any): boolean {
     const users = loadUsers();
 
     // check username in use
     if (users.some((u: { username: any; }) => u.username === username)) {
-        return "username invalid";
+        return false;
     }
 
     // check password quality
     if (!isPasswordStrong(password)) {
-        return "password valid";
+        return false;
     }
 
     // hash pass and store user
@@ -54,11 +54,11 @@ function signUp(username: any, password: any) {
 
     saveUsers(users);
 
-    return "success";
+    return true;
 }
 
 // ========== LOGIN ==========
-function isLoginSuccessful(username: any, password: any) {
+export function isLoginSuccessful(username: any, password: any): boolean {
     const users = loadUsers();
     const user = users.find((u: { username: any; }) => u.username === username);
 

@@ -8,7 +8,8 @@ import UserPassInput from "@/components/ui/user-pass-input";
 import { Colors } from "@/constants/theme";
 import { useRouter } from 'expo-router';
 import { useState } from "react";
-import { ScrollView, StyleSheet, View } from 'react-native';
+import {ScrollView, StyleSheet, View } from 'react-native';
+import {isLoginSuccessful} from "@/functionality/login-screen";
 
 /**
  * The currently logged-in user's username.
@@ -31,7 +32,8 @@ export default function LoginScreen() {
     const [displayError, setDisplayError] = useState(false);
 
     const logIn = (username: string, password: string) => {
-        const valid = username != ''; // TODO call Amalia's method!
+        // const valid = username != ''; // TODO call Amalia's method!
+        const valid: boolean = isLoginSuccessful(username, password);
         console.log("Login attempt with: " + username + " " + password);
             if (valid) {
             router.replace('/home' as any);
