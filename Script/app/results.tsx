@@ -10,23 +10,21 @@ import ImageBoxView from "@/components/ui/image-box-view";
 import { acceptedImages, ImageCBuilder, resetAcceptedImages } from './confirm'
 import { Colors } from "@/constants/theme";
 
+/**
+ * Screen where user views image-id pairs they just confirmed.
+ */
 export default function ResultsScreen() {
     const router = useRouter();
 
-    const [images, setImages] = useState<ImageCBuilder[]>([
-        {
-            uri: "asdfasdf",
-            id: 100,
-            width: 20,
-            height: 20,
-            description: "bad image lmao"
-        }
-    ]);
+    const [images, setImages] = useState<ImageCBuilder[]>([]);
 
     useEffect(() => {
         setImages(acceptedImages);
     }, [setImages]);
 
+    /**
+     * ImageBoxViews to be displayed on the results screen.
+     */
     const imageBoxes = images.map(ib =>
         <Fragment key={ib.id}>
             <ImageBoxView

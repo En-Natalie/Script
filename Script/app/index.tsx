@@ -10,9 +10,21 @@ import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
 import { useState } from "react";
 
+/**
+ * The currently logged-in user's username.
+ */
 export let currentUsername: string = '';
+
+/**
+ * Set the current logged-in user's username.
+ * @param username username of who is logged in
+ */
 export function setCurrentUsername(username: string): void { currentUsername = username; }
 
+/**
+ * Screen that allows user to log in via entering their username and password
+ * or navigate to the sign up screen.
+ */
 export default function LoginScreen() {
     const router = useRouter();
 

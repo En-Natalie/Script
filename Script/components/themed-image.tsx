@@ -7,6 +7,13 @@ export type ThemedImageProps = {
     height: number;
 };
 
+/**
+ * Image that displays self in a nice way
+ * @param uri uri of image to display
+ * @param width width of image to display, used for aspect ratio
+ * @param height height of image to display, used for aspect ratio
+ * @param style additional styling
+ */
 export function ThemedImage({uri, width, height, style}: ThemedImageProps & ImageProps) {
     const aspectRatio = width / height;
 

@@ -9,6 +9,9 @@ import { getImagesOfUsername, ImageStorageEntry } from "@/functionality/data-sto
 import { currentUsername } from "@/app/index";
 import ImageBoxHistory from "@/components/ui/image-box-history";
 
+/**
+ * Screen that shows user their previously generated image-id pairs
+ */
 export default function HistoryScreen() {
     const cloudinary = new Cloudinary({
         cloud: {
@@ -19,6 +22,9 @@ export default function HistoryScreen() {
         }
     });
 
+    /**
+     * The information necessary to show an image on the history screen.
+     */
     type ImageHBuilder = {
         id: number;
         publicID: string;
@@ -29,6 +35,9 @@ export default function HistoryScreen() {
 
     const [images, setImages] = useState<ImageHBuilder[]>([]);
 
+    /**
+     * Populates images to be displayed with images from memory based on username
+     */
     useEffect(() => {
         const newImages: ImageHBuilder[] = [];
         const entries: ImageStorageEntry[] = getImagesOfUsername(currentUsername);
@@ -49,6 +58,9 @@ export default function HistoryScreen() {
 
     }, [setImages]);
 
+    /**
+     * ImageBoxHistorys to be displayed on the history screen.
+     */
     const imageBoxes = images.map(ib =>
         <Fragment key={ib.id}>
             <ImageBoxHistory description={ib.description}>

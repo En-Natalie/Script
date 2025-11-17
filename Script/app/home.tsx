@@ -4,10 +4,13 @@ import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ThemedButton } from '@/components/ui/themed-button';
-import { Image, ScrollView, StyleSheet } from 'react-native';
+import { Image, ScrollView } from 'react-native';
 import { Constants, Colors } from '@/constants/theme';
 import { useRouter } from 'expo-router';
 
+/**
+ * Screen that gives logged in in users options to generate id, view credits, view history, and log out.
+ */
 export default function HomeScreen() {
     const router = useRouter();
 
@@ -16,6 +19,9 @@ export default function HomeScreen() {
     const w = logoURL.width;
     const aspectRatio = w / h;
 
+    /**
+     * Image element showing logo
+     */
     const logoImage = <Image
         style={[{
             borderWidth: Constants.default.outlineWidth,

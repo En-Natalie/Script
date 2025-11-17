@@ -11,6 +11,9 @@ import { Colors } from "@/constants/theme";
 import { currentUsername } from "@/app/index";
 import { storeImage } from "@/functionality/data-storage";
 
+/**
+ * The information necessary to show an image on the confirm screen.
+ */
 export type ImageCBuilder = {
     uri: string;
     id: number;
@@ -92,6 +95,9 @@ export default function ConfirmScreen() {
         description: "Loading..."
     }]);
 
+    /**
+     *
+     */
     useEffect(() => {
         const converted: ImageCBuilder[] = [];
 
@@ -138,6 +144,9 @@ export default function ConfirmScreen() {
         }
     }
 
+    /**
+     * ImageBoxConfirms to be displayed on the confirm screen.
+     */
     const imageBoxes = images.map(ib =>
         <Fragment key={ib.id}>
             <ImageBoxConfirm

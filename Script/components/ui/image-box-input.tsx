@@ -12,6 +12,14 @@ export type ImageBoxInputProps = {
     onRemoveButtonPress: (id: number) => void,
 };
 
+/**
+ * Component to display images on the input screen
+ * @param id identifying number for this component, used to differentiate self from others
+ * @param uri uri of image to display *
+ * @param width width of image to display
+ * @param height height of image to display * @param onRemoveButtonPress
+ * @param onRemoveButtonPress what to do when remove button is pressed
+ */
 export function ImageBoxInput({id, uri, width, height, onRemoveButtonPress}: ImageBoxInputProps) {
     return (
         <Container>

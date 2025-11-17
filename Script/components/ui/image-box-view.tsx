@@ -13,13 +13,26 @@ export type ImageBoxViewProps = {
     description: string,
 };
 
+/**
+ * Component to display images on the results screen
+ * @param uri uri of image to display
+ * @param width width of image to display
+ * @param height height of image to display
+ * @param description image description to display alongside image
+ */
 function ImageBoxView({ uri, width, height, description }: ImageBoxViewProps) {
 
+    /**
+     * Save image to gallery.
+     */
     const saveImage = () => {
         console.log('saving image...');
         MediaLibrary.saveToLibraryAsync(uri).then(r => console.log("image saved!: " + r));
     }
 
+    /**
+     * Copy image description to keyboard.
+     */
     const copyText = async () => {
         await setStringAsync(description)
     }

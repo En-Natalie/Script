@@ -3,6 +3,9 @@ import { StyleSheet, TextInput, type TextInputProps } from 'react-native';
 
 import { Ref } from "react";
 
+/**
+ * useConfirmStyle?: false = for login/signup page, true = for image-box-confirm
+ */
 export type ThemedTextInputProps = TextInputProps & {
     placeholder: string,
     type?: 'default' | 'emphasis' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link',

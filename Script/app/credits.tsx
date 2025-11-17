@@ -5,6 +5,10 @@ import { Header } from '@/components/ui/header';
 import { ScrollView } from 'react-native';
 import { Colors } from "@/constants/theme";
 
+/**
+ * Screen that displays some information about app creators.
+ * Probably should be renamed to About Us, but I like credits better.
+ */
 export default function CreditsScreen() {
     return (
         <ScrollView stickyHeaderIndices={[0]} style={{backgroundColor: Colors.default.background}}>
@@ -26,10 +30,10 @@ export default function CreditsScreen() {
 
                     <ThemedText type='emphasis'>Tools Used</ThemedText>
                     <ThemedText type='short'>Wireframe: Figma</ThemedText>
-                    <ThemedText type='short'>Frontend: React Native</ThemedText>
-                    <ThemedText type='short'>Backend: Node.js</ThemedText>
+                    <ThemedText type='short'>Frontend: React Native, Expo</ThemedText>
+                    {/*<ThemedText type='short'>Backend: Node.js</ThemedText>*/}
                     <ThemedText type='short'>Cloud Service: Cloudinary</ThemedText>
-                    <ThemedText type='short'>Security Service: Qualysec</ThemedText>
+                    {/*<ThemedText type='short'>Security Service: Qualysec</ThemedText>*/}
                     <ThemedText type='short'>AI Generator: Open AI</ThemedText>
                 </Container>
             </ThemedView>

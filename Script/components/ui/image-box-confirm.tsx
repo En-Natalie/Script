@@ -18,16 +18,25 @@ export type ImageBoxConfirmProps = {
     onRemoveButtonPress: (id: number) => void,
 };
 
-export function ImageBoxConfirm(this: any, {id, uri, width, height, description = 'hehh heh description', onAcceptButtonPress, onRemoveButtonPress}: ImageBoxConfirmProps) {
+/**
+ * Component to display images on the confirm screen
+ * @param id identifying number for this component, used to differentiate self from others
+ * @param uri uri of image to display
+ * @param width width of image to display
+ * @param height height of image to display
+ * @param description image description to display alongside image
+ * @param onAcceptButtonPress what to do when accept button is pressed
+ * @param onRemoveButtonPress what to do when remove button is pressed
+ */
+export function ImageBoxConfirm({id, uri, width, height, description = 'hehh heh description', onAcceptButtonPress, onRemoveButtonPress}: ImageBoxConfirmProps) {
     const onRegenerateButton = () => {
         console.log('Regenerate button' + id);
-        setText('');
+        setText(''); // TODO call brian method
     }
 
     const textInputRef = useRef<TextInput>(null);
     const onEditButtonPress = () => {
         console.log('Edit button' + id);
-        setText(text + "0");
         if (textInputRef.current) {
             textInputRef.current.focus();
         }
@@ -38,6 +47,9 @@ export function ImageBoxConfirm(this: any, {id, uri, width, height, description 
         }
     }
 
+    /**
+     * The image description, state that updates
+     */
     const [text, setText] = useState<string>(description);
 
     return (

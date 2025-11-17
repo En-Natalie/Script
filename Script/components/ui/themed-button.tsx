@@ -38,7 +38,4 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: 5,
     },
-    headingButton: {
-        maxWidth: 45,
-    }
 });

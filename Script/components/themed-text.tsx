@@ -3,10 +3,19 @@ import { Colors } from "@/constants/theme";
 
 import { useThemeColor } from '@/hooks/use-theme-color';
 
+/**
+ * type?: default style option to use
+ */
 export type ThemedTextProps = TextProps & {
   type?: 'default' | 'short' | 'emphasis' | 'error' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
 };
 
+/**
+ * Text that displays self in pretty way
+ * @param style additional styling
+ * @param type list of default style options
+ * @param rest
+ */
 export function ThemedText({ style, type = 'default', ...rest }: ThemedTextProps) {
   const color = useThemeColor('text');
 
@@ -67,7 +76,6 @@ const styles = StyleSheet.create({
         // outlineStyle: 'solid',
         // outlineWidth: 10,
     },
-
     defaultSemiBold: {
         fontSize: 16,
         lineHeight: 24,

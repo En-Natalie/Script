@@ -11,6 +11,10 @@ import { Colors } from "@/constants/theme";
 import { setCurrentUsername} from "@/app/index";
 import { useState } from "react";
 
+/**
+ * Screen that allows user to sign up via entering a username and password
+ * or navigate to the log in screen.
+ */
 export default function SignupScreen() {
     const router = useRouter();
 

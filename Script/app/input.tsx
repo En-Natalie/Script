@@ -11,6 +11,9 @@ import { useRouter } from 'expo-router'
 import { getImageAsync } from "expo-clipboard";
 import { Colors } from "@/constants/theme";
 
+/**
+ * Components necessary to display an image on the input screen.
+ */
 export type ImageBuilder = {
     uri: string;
     id: number;
@@ -18,8 +21,14 @@ export type ImageBuilder = {
     height: number;
 }
 
+/**
+ * Images inputted on the input screen.
+ */
 export let globalImages: ImageBuilder[] = [];
 
+/**
+ * Screen where user inputs images to be given IDs.
+ */
 export default function InputScreen() {
     const [images, setImages] = useState<ImageBuilder[]>([
     ]);
@@ -27,7 +36,10 @@ export default function InputScreen() {
 
     const router = useRouter();
 
-    // TODO why does it take so long ?? what..
+    /**
+     * Add an image to the input screen from the keyboard.
+     * TODO why does it take so long ?? what..
+     */
     const pasteImage = async () => {
         const image = await getImageAsync({ format: 'png' })
 
@@ -46,7 +58,7 @@ export default function InputScreen() {
     }
 
     /**
-     * Launches gallery, adds selected images to images array
+     * Launch gallery, add selected images to images array.
      */
     const openGallery = async () => {
         console.log('Picking image...');
@@ -86,6 +98,9 @@ export default function InputScreen() {
         setImages(newImages);
     }
 
+    /**
+     * ImageBoxInputs to be displayed on the input screen.
+     */
     const imageBoxes = images.map(ib =>
         <Fragment key={ib.id}>
             <ImageBoxInput
@@ -106,7 +121,6 @@ export default function InputScreen() {
                     {imageBoxes}
                 </ThemedView>
             </ScrollView>
-            {/* Button menu */}
             <ThemedView color='accent' style={styles.buttonMenu}>
                 <ThemedView color='accent' style={styles.verticalButtonMenu}>
                     <ThemedButton onPress={pasteImage}>
@@ -135,6 +149,9 @@ export default function InputScreen() {
 }
 
 const styles = StyleSheet.create({
+    /**
+     * Used to display paste/gallery and continue buttons side by side
+     */
     buttonMenu: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -142,12 +159,16 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
         outlineWidth: 2,
-        outlineColor: '#000',
+        outlineColor: Colors.default.border,
         padding: 10,
         height: 50,
         minHeight: 50,
         flex: 0.25,
     },
+
+    /**
+     * Used to display the paste/gallery buttons vertically on top of one another
+     */
     verticalButtonMenu: {
         flexDirection: 'column',
         alignItems: 'center',

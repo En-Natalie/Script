@@ -10,6 +10,12 @@ export type UserPassInputProps = {
     buttonText: string,
 }
 
+/**
+ * Components for inputting username, inputting password, and pressing a button to submit.
+ * @param onSubmitEditing what to do upon submitting
+ * @param buttonText what the submit button should say
+ * @param children children, can be used for error text
+ */
 export default function UserPassInput({onSubmitEditing, buttonText, children}: UserPassInputProps & PropsWithChildren) {
 
     const [username, setUsername] = useState<string>("");

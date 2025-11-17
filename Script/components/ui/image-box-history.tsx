@@ -5,11 +5,15 @@ import { IconSymbol } from './icon-symbol';
 import { setStringAsync} from "expo-clipboard";
 import { PropsWithChildren } from "react";
 
-
 export type ImageBoxHistoryProps = {
     description: string,
 };
 
+/**
+ * Component to display images on the history screen
+ * @param uri uri of image to display
+ * @param description image description to display alongside image
+ */
 function ImageBoxHistory({ description, children }: ImageBoxHistoryProps & PropsWithChildren) {
 
     // const saveImage = () => {
@@ -20,6 +24,9 @@ function ImageBoxHistory({ description, children }: ImageBoxHistoryProps & Props
     //     // MediaLibrary.saveToLibraryAsync(uri).then(r => console.log("image saved!: " + r));
     // }
 
+    /**
+     * Copy image description to keyboard.
+     */
     const copyText = async () => {
         await setStringAsync(description)
     }

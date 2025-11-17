@@ -13,6 +13,13 @@ export type HeaderProps = {
     backPath: "/" | '/signup' | '/home' | "/credits" | "/input" | "/confirm",
 };
 
+/**
+ * Header displayed at the top of all pages
+ * @param title text to display in header
+ * @param backPath path to take when back button is pressed
+ * @param style additional styling
+ * @param children additional children
+ */
 export function Header({ title = "TODO", backPath, style, children }: SafeAreaViewProps & HeaderProps) {
     const router = useRouter();
 
