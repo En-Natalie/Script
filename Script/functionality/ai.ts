@@ -204,56 +204,7 @@ function defaultPrompt() {
     ].join("\n");
 }
 
-/* ---------- Example AiClient implementations ---------- */
-/*
-    OpenAIChatClient example:
-    - Requires process.env.OPENAI_API_KEY
-    - Optionally set model via meta.model or env OPENAI_MODEL
-    - Embeds the image as a markdown image (URL or data URI) in the user message.
-*/
-export class OpenAIChatClient implements AiClient {
-    apiKey: string;
 
-    constructor(apiKey?: string) {
-        this.apiKey = apiKey ?? process.env.OPENAI_API_KEY ?? "";
-        if (!this.apiKey) throw new Error("OpenAI API key not provided. Set OPENAI_API_KEY or pass key to constructor.");
-    }
-
-    async analyze(prompt: string, imageDataUri?: string, meta?: Record<string, any>): Promise<string> {
-        const model = meta?.model ?? process.env.OPENAI_MODEL ?? "gpt-4o-mini";
-        const temperature = meta?.temperature ?? 0.2;
-        // Build a single user message that includes the prompt and the image reference.
-        const userContent = imageDataUri
-            ? `${prompt}\n\nImage:\n\n![image](${imageDataUri})\n\nPlease analyze the image above in detail.`
-            : `${prompt}\n\n(No image provided)`;
-
-        const body = {
-            model,
-            messages: [{ role: "user", content: userContent }],
-            temperature,
-            max_tokens: meta?.max_tokens ?? 1200,
-        };
-
-        const res = await fetch("https://api.openai.com/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${this.apiKey}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-        });
-
-        if (!res.ok) {
-            const text = await res.text().catch(() => "");
-            throw new Error(`OpenAI error ${res.status}: ${text}`);
-        }
-
-        const json = await res.json();
-        const choice = json.choices?.[0];
-        const content = choice?.message?.content ?? choice?.text ?? JSON.stringify(json);
-        return content;
-    }
-}
 
 /**
  * LocalHFClient
@@ -320,7 +271,7 @@ export class HuggingFaceClient implements AiClient {
             // If caller passed a full URL (router), use it directly; otherwise use models/{id}
             const endpoint = String(model).startsWith('http')
                 ? String(model)
-                : `https://api-inference.huggingface.co/models/${model}`;
+                : `http://localhost:8081`;
 
             // Try the direct Hugging Face API
             try {

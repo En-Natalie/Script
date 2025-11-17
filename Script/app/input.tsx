@@ -5,8 +5,8 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ImageBoxInput } from '@/components/ui/image-box-input';
 import { ThemedButton } from '@/components/ui/themed-button';
 import { Colors } from "@/constants/theme";
-import { OpenAIChatClient, HuggingFaceClient, ImageAnalyzer } from '@/functionality/ai';
-import { HUGGING_FACE_KEY, HUGGING_FACE_MODEL, OPENAI_API_KEY, OPENAI_MODEL } from '@/functionality/env';
+import { HuggingFaceClient, ImageAnalyzer } from '@/functionality/ai';
+import { HUGGING_FACE_KEY, HUGGING_FACE_MODEL } from '@/functionality/env';
 import { getImageAsync } from "expo-clipboard";
 import * as FileSystem from 'expo-file-system/legacy';
 import * as ImagePicker from 'expo-image-picker';
@@ -129,37 +129,21 @@ export default function InputScreen() {
 
             // Set up AI client if credentials are available
             let analyzer: ImageAnalyzer | null = null;
-            
-            // Try OpenAI first if key is set, otherwise fall back to Hugging Face
-            if (OPENAI_API_KEY && String(OPENAI_API_KEY).length > 0) {
-                try {
-                    console.log('OPENAI_API_KEY preview:', String(OPENAI_API_KEY).slice(0,8) + '...');
-                    console.log('OPENAI_MODEL:', OPENAI_MODEL);
-                    const client = new OpenAIChatClient(OPENAI_API_KEY);
-                    analyzer = new ImageAnalyzer(client);
-                    console.log('Using OpenAIChatClient for image analysis');
-                } catch (err) {
-                    console.warn('OpenAIChatClient construction failed:', err);
-                    analyzer = null;
-                }
-            }
-            
-            // Fall back to Hugging Face if OpenAI key not set or failed
-            if (!analyzer) {
-                try {
-                    console.log('HUGGING_FACE_KEY preview:', HUGGING_FACE_KEY ? (String(HUGGING_FACE_KEY).slice(0,8) + '...') : '<empty>');
-                    console.log('HUGGING_FACE_MODEL:', HUGGING_FACE_MODEL);
-                    const modelToUse = (HUGGING_FACE_MODEL && String(HUGGING_FACE_MODEL).length > 0)
-                        ? String(HUGGING_FACE_MODEL)
-                        : 'Salesforce/blip-image-captioning-base';
-                    console.log('Using HF model:', modelToUse);
-                    const client = new HuggingFaceClient(HUGGING_FACE_KEY, modelToUse);
-                    analyzer = new ImageAnalyzer(client);
-                    console.log('Using HuggingFaceClient for image analysis');
-                } catch (err) {
-                    console.warn('HuggingFaceClient construction failed, using default analyzer:', err);
-                    analyzer = new ImageAnalyzer();
-                }
+            console.log('HUGGING_FACE_KEY preview:', HUGGING_FACE_KEY ? (String(HUGGING_FACE_KEY).slice(0,8) + '...') : '<empty>');
+            console.log('HUGGING_FACE_MODEL:', HUGGING_FACE_MODEL);
+
+            // Attempt to construct a HuggingFaceClient even if values look absent; constructor will throw with a clear message if missing.
+            try {
+                const modelToUse = (HUGGING_FACE_MODEL && String(HUGGING_FACE_MODEL).length > 0)
+                    ? String(HUGGING_FACE_MODEL)
+                    : 'Salesforce/blip-image-captioning-base';
+                console.log('Using HF model:', modelToUse);
+                const client = new HuggingFaceClient(HUGGING_FACE_KEY, modelToUse);
+                analyzer = new ImageAnalyzer(client);
+                console.log('Using HuggingFaceClient for image analysis');
+            } catch (err) {
+                console.warn('HuggingFaceClient construction failed, falling back to local analyzer:', err);
+                analyzer = new ImageAnalyzer();
             }
 
             // Convert images and analyze them in parallel
