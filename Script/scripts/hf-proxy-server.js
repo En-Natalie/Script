@@ -7,19 +7,32 @@
 const express = require('express');
 const axios = require('axios');
 const multer = require('multer');
+const cors = require('cors');
 
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() });
 
+// Allow cross-origin requests for development; adjust in production.
+app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 const HF_API_KEY = process.env.HUGGING_FACE_KEY || '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';
 const HF_MODEL = process.env.HUGGING_FACE_MODEL || 'google/vit-base-patch16-224';
+// Optional simple proxy auth: set PROXY_API_KEY to require clients to present it in header 'x-proxy-key'
+const PROXY_API_KEY = process.env.PROXY_API_KEY || null;
 
 app.post('/analyze', upload.single('image'), async (req, res) => {
     try {
         console.log('[Proxy] /analyze request received');
+        // If a proxy API key is set, require it
+        if (PROXY_API_KEY) {
+            const got = req.headers['x-proxy-key'] || req.headers['x-proxy-key'.toLowerCase()];
+            if (!got || String(got) !== PROXY_API_KEY) {
+                console.warn('[Proxy] missing/invalid x-proxy-key');
+                return res.status(401).json({ error: 'Unauthorized' });
+            }
+        }
         
         const { imageDataUri, model } = req.body;
         const modelToUse = model || HF_MODEL;
@@ -34,6 +47,7 @@ app.post('/analyze', upload.single('image'), async (req, res) => {
             const endpoint = `https://api-inference.huggingface.co/models/${modelToUse}`;
             
             try {
+                // Forward as octet-stream
                 const response = await axios.post(endpoint, req.file.buffer, {
                     headers: {
                         Authorization: `Bearer ${HF_API_KEY}`,
@@ -59,6 +73,7 @@ app.post('/analyze', upload.single('image'), async (req, res) => {
             const endpoint = `https://api-inference.huggingface.co/models/${modelToUse}`;
             
             try {
+                // The HF inference API accepts JSON inputs for many vision models.
                 const response = await axios.post(
                     endpoint,
                     { inputs: imageDataUri },
@@ -92,8 +107,10 @@ app.get('/health', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`[Proxy] Server listening on port ${PORT}`);
+// Bind to 0.0.0.0 to ensure IPv4 clients (127.0.0.1) can connect on Windows
+const HOST = process.env.HOST || '0.0.0.0';
+app.listen(PORT, HOST, () => {
+    console.log(`[Proxy] Server listening on ${HOST}:${PORT}`);
     console.log(`[Proxy] HF API Key: ${HF_API_KEY.slice(0, 8)}...`);
     console.log(`[Proxy] HF Model: ${HF_MODEL}`);
 });
