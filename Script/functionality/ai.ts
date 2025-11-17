@@ -1,10 +1,11 @@
 import axios from "axios";
+import { HUGGING_FACE_KEY, HUGGING_FACE_MODEL } from "./env";
 
-// Usage: await analyzeImageFromUrl(imageUrl, apiKey)
-export async function analyzeImageFromUrl(imageUrl: string, apiKey: string): Promise<string> {
+// Usage: await analyzeImageFromUrl(imageUrl)
+export async function analyzeImageFromUrl(imageUrl: string, apiKey: string = HUGGING_FACE_KEY, model: string = HUGGING_FACE_MODEL): Promise<string> {
     const imageBlob = await fetch(imageUrl).then(r => r.blob());
     const response = await axios.post(
-        "https://api-inference.huggingface.co/models/nlpconnect/vit-gpt2-image-captioning",
+        `https://api-inference.huggingface.co/models/${model}`,
         imageBlob,
         {
             headers: {
