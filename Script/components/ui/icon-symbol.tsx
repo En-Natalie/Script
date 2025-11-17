@@ -39,12 +39,14 @@ const MAPPING = {
   'photo.fill.on.rectangle.fill': 'image', // gallery // TODO
 
   'hand.thumbsup.fill': 'thumb-up', // approve
-  'trash.fill': 'star', // remove
+  'trash.fill': 'star', // remove // TODO
 
   'repeat': 'repeat', // regenerate id
   'pencil.tip.crop.circle.badge.plus': 'edit', // edit id
 
   'square.and.arrow.down': 'save', // save image
+
+  'exclamationmark.circle': 'star' // warning // TODO
 } as IconMapping;
 
 /**

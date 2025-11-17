@@ -1,22 +1,16 @@
-{/* <Button
-  onPress={onPressLearnMore}
-  title="Learn More"
-  color="#841584"
-  accessibilityLabel="Learn more about this purple button"
-/> */}
-
 import { ThemedView } from '@/components/themed-view';
 import { Colors, Constants } from '@/constants/theme';
 import { StyleSheet, TouchableOpacity, ViewProps } from 'react-native';
 
 export type ThemedButtonProps = {
     color?: 'button' | 'red' | 'green',
+    onPress?: () => void,
 };
 
-export function ThemedButton({ color = 'button', style = styles.default, children }: ViewProps & ThemedButtonProps) {
+export function ThemedButton({ color = 'button', onPress, style = styles.default, children }: ViewProps & ThemedButtonProps) {
     return (
         <ThemedView color={color} style={style} >
-            <TouchableOpacity style={styles.touchableOpacity} >
+            <TouchableOpacity style={styles.touchableOpacity} onPress={onPress} >
                 {children}
             </TouchableOpacity>
         </ThemedView>
@@ -43,5 +37,5 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         gap: 5,
-    }
+    },
 });

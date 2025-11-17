@@ -1,32 +1,56 @@
 import { Container } from '@/components/ui/container';
-import { Colors, Constants } from '@/constants/theme';
-import { PropsWithChildren } from 'react';
-import { StyleSheet, View } from 'react-native';
 import { ThemedText } from '../themed-text';
 import { ThemedButton } from './themed-button';
 import { IconSymbol } from './icon-symbol';
-import { ThemedView } from '../themed-view';
+import { ThemedImage } from "@/components/themed-image";
+import { setStringAsync } from "expo-clipboard";
+import * as MediaLibrary from "expo-media-library";
 
-export function ImageBoxView({ children }: PropsWithChildren) {
+export type ImageBoxViewProps = {
+    uri: string,
+    width: number,
+    height: number,
+    description: string,
+};
+
+/**
+ * Component to display images on the results screen
+ * @param uri uri of image to display
+ * @param width width of image to display
+ * @param height height of image to display
+ * @param description image description to display alongside image
+ */
+function ImageBoxView({ uri, width, height, description }: ImageBoxViewProps) {
+
+    /**
+     * Save image to gallery.
+     */
+    const saveImage = () => {
+        console.log('saving image...');
+        MediaLibrary.saveToLibraryAsync(uri).then(r => console.log("image saved!: " + r));
+    }
+
+    /**
+     * Copy image description to keyboard.
+     */
+    const copyText = async () => {
+        await setStringAsync(description)
+    }
+
     return (
         <Container>
-            { children }
+            <ThemedImage uri={uri} width={width} height={height}/>
+
             <ThemedText>
-                This is the image description hahaha
+                {description}
             </ThemedText>
             
-            <ThemedView color='container' style={styles.imageButtons} >
-                <ThemedButton>
-                    <IconSymbol name='square.and.arrow.down'></IconSymbol>
-                    <ThemedText>Save Image</ThemedText>
-                </ThemedButton>
-                <ThemedButton>
-                    <IconSymbol name='photo.fill.on.rectangle.fill'></IconSymbol>
-                    <ThemedText>Copy Image</ThemedText>
-                </ThemedButton>
-            </ThemedView>
-            
-            <ThemedButton>
+            <ThemedButton onPress={saveImage}>
+                <IconSymbol name='square.and.arrow.down'></IconSymbol>
+                <ThemedText>Save Image</ThemedText>
+            </ThemedButton>
+
+            <ThemedButton onPress={copyText}>
                 <IconSymbol name='doc.on.clipboard'></IconSymbol>
                 <ThemedText>Copy ID Text</ThemedText>
             </ThemedButton>
@@ -34,15 +58,4 @@ export function ImageBoxView({ children }: PropsWithChildren) {
     );
 }
 
-const styles = StyleSheet.create({
-    imageButtons: {
-        flexDirection: 'row',
-        borderRadius: Constants.default.borderRadius,
-        alignItems: 'center',
-        alignContent: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        flex: 1,
-        gap: 10,
-    },
-});
+export default ImageBoxView
