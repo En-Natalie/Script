@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+transformers
+torch
+pillow
+requests
+# Note: installing torch via pip may require the correct wheel for your platform.
+# For CPU-only Windows, you may prefer installing torch with the official wheel from PyTorch.
+# Example (Windows, CPU):
+# pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu

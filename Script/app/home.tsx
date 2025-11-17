@@ -4,9 +4,9 @@ import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ThemedButton } from '@/components/ui/themed-button';
-import { Image, ScrollView } from 'react-native';
-import { Constants, Colors } from '@/constants/theme';
+import { Colors, Constants } from '@/constants/theme';
 import { useRouter } from 'expo-router';
+import { Image, ScrollView } from 'react-native';
 
 /**
  * Screen that gives logged in in users options to generate id, view credits, view history, and log out.
@@ -45,11 +45,11 @@ export default function HomeScreen() {
                 </Container>
 
                 <Container>
-                    <ThemedButton onPress={() => router.navigate('/input')}>
+                    <ThemedButton onPress={() => router.navigate('/input' as any)}>
                         <IconSymbol name='sparkles'></IconSymbol>
                         <ThemedText>Generate ID</ThemedText>
                     </ThemedButton>
-                    <ThemedButton onPress={() => router.navigate('/history')}>
+                    <ThemedButton onPress={() => router.navigate('/history' as any)}>
                         <IconSymbol name='doc.text.magnifyingglass'></IconSymbol>
                         <ThemedText>View History</ThemedText>
                     </ThemedButton>
@@ -57,7 +57,7 @@ export default function HomeScreen() {
                         <IconSymbol name='star'></IconSymbol>
                         <ThemedText>Credits</ThemedText>
                     </ThemedButton>
-                    <ThemedButton onPress={() => router.replace('/')}>
+                    <ThemedButton onPress={() => router.replace('/' as any)}>
                         <IconSymbol name='arrow.left'></IconSymbol>
                         <ThemedText>Log Out</ThemedText>
                     </ThemedButton>

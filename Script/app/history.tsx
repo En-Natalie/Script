@@ -2,12 +2,14 @@ import { ThemedView } from '@/components/themed-view';
 import { Header } from '@/components/ui/header';
 import { Fragment, useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
+// @ts-ignore: no types for cloudinary-react-native in this project
 import { AdvancedImage } from "cloudinary-react-native";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { Colors, Constants } from "@/constants/theme";
-import { getImagesOfUsername, ImageStorageEntry } from "@/functionality/data-storage";
+// @ts-ignore: no types for @cloudinary/url-gen in this project
 import { currentUsername } from "@/app/index";
 import ImageBoxHistory from "@/components/ui/image-box-history";
+import { Colors, Constants } from "@/constants/theme";
+import { getImagesOfUsername, ImageStorageEntry } from "@/functionality/data-storage";
+import { Cloudinary } from "@cloudinary/url-gen";
 
 /**
  * Screen that shows user their previously generated image-id pairs

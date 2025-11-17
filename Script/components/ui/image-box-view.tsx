@@ -1,9 +1,10 @@
-import { Container } from '@/components/ui/container';
-import { ThemedText } from '../themed-text';
-import { ThemedButton } from './themed-button';
-import { IconSymbol } from './icon-symbol';
 import { ThemedImage } from "@/components/themed-image";
+import { Container } from '@/components/ui/container';
 import { setStringAsync } from "expo-clipboard";
+import { ThemedText } from '../themed-text';
+import { IconSymbol } from './icon-symbol';
+import { ThemedButton } from './themed-button';
+// @ts-ignore: expo-media-library has no bundled types in this project
 import * as MediaLibrary from "expo-media-library";
 
 export type ImageBoxViewProps = {
@@ -27,7 +28,7 @@ function ImageBoxView({ uri, width, height, description }: ImageBoxViewProps) {
      */
     const saveImage = () => {
         console.log('saving image...');
-        MediaLibrary.saveToLibraryAsync(uri).then(r => console.log("image saved!: " + r));
+        MediaLibrary.saveToLibraryAsync(uri).then((r: any) => console.log("image saved!: " + r));
     }
 
     /**

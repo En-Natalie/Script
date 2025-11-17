@@ -1,14 +1,14 @@
-import {StyleSheet, ScrollView, View} from 'react-native';
+import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from '@/components/themed-view';
 import { Container } from '@/components/ui/container';
 import { Header } from '@/components/ui/header';
-import { useRouter } from 'expo-router'
-import UserPassInput from "@/components/ui/user-pass-input";
-import { ThemedText } from "@/components/themed-text";
-import { ThemedButton } from "@/components/ui/themed-button";
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import { ThemedButton } from "@/components/ui/themed-button";
+import UserPassInput from "@/components/ui/user-pass-input";
 import { Colors } from "@/constants/theme";
+import { useRouter } from 'expo-router';
 import { useState } from "react";
+import { ScrollView, StyleSheet, View } from 'react-native';
 
 /**
  * The currently logged-in user's username.
@@ -33,8 +33,8 @@ export default function LoginScreen() {
     const logIn = (username: string, password: string) => {
         const valid = username != ''; // TODO call Amalia's method!
         console.log("Login attempt with: " + username + " " + password);
-        if (valid) {
-            router.replace('/home');
+            if (valid) {
+            router.replace('/home' as any);
             currentUsername = username;
         }
         else {
@@ -64,7 +64,7 @@ export default function LoginScreen() {
 
                 <Container>
                     <ThemedText type={"emphasis"}>New user?</ThemedText>
-                    <ThemedButton onPress={() => router.replace('/signup')}>
+                    <ThemedButton onPress={() => router.replace('/signup' as any)}>
                         <ThemedText>Sign up!</ThemedText>
                         <IconSymbol name={'arrow.right'}></IconSymbol>
                     </ThemedButton>

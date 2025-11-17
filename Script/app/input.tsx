@@ -4,12 +4,15 @@ import { Header } from '@/components/ui/header';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ImageBoxInput } from '@/components/ui/image-box-input';
 import { ThemedButton } from '@/components/ui/themed-button';
-import { Fragment, useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import { useRouter } from 'expo-router'
-import { getImageAsync } from "expo-clipboard";
 import { Colors } from "@/constants/theme";
+import { OpenAIChatClient, HuggingFaceClient, ImageAnalyzer } from '@/functionality/ai';
+import { HUGGING_FACE_KEY, HUGGING_FACE_MODEL, OPENAI_API_KEY, OPENAI_MODEL } from '@/functionality/env';
+import { getImageAsync } from "expo-clipboard";
+import * as FileSystem from 'expo-file-system/legacy';
+import * as ImagePicker from 'expo-image-picker';
+import { useRouter } from 'expo-router';
+import { Fragment, useState } from 'react';
+import { ActivityIndicator, Modal, ScrollView, StyleSheet, View } from 'react-native';
 
 /**
  * Components necessary to display an image on the input screen.
@@ -19,6 +22,7 @@ export type ImageBuilder = {
     id: number;
     width: number;
     height: number;
+    description?: string; // AI-generated description
 }
 
 /**
@@ -33,6 +37,7 @@ export default function InputScreen() {
     const [images, setImages] = useState<ImageBuilder[]>([
     ]);
     const [nextId, setNextId] = useState<number>(0);
+    const [isAnalyzing, setIsAnalyzing] = useState(false);
 
     const router = useRouter();
 
@@ -113,6 +118,97 @@ export default function InputScreen() {
         </Fragment>
     );
 
+    /**
+     * Analyze images and continue to the next screen.
+     * Sets a loading state, stores the selected images globally, performs (or simulates) analysis,
+     * and then navigates; this ensures the analyzeAndContinue reference used by the button exists.
+     */
+    const analyzeAndContinue = async (imgs: ImageBuilder[]) => {
+        setIsAnalyzing(true);
+        try {
+
+            // Set up AI client if credentials are available
+            let analyzer: ImageAnalyzer | null = null;
+            
+            // Try OpenAI first if key is set, otherwise fall back to Hugging Face
+            if (OPENAI_API_KEY && String(OPENAI_API_KEY).length > 0) {
+                try {
+                    console.log('OPENAI_API_KEY preview:', String(OPENAI_API_KEY).slice(0,8) + '...');
+                    console.log('OPENAI_MODEL:', OPENAI_MODEL);
+                    const client = new OpenAIChatClient(OPENAI_API_KEY);
+                    analyzer = new ImageAnalyzer(client);
+                    console.log('Using OpenAIChatClient for image analysis');
+                } catch (err) {
+                    console.warn('OpenAIChatClient construction failed:', err);
+                    analyzer = null;
+                }
+            }
+            
+            // Fall back to Hugging Face if OpenAI key not set or failed
+            if (!analyzer) {
+                try {
+                    console.log('HUGGING_FACE_KEY preview:', HUGGING_FACE_KEY ? (String(HUGGING_FACE_KEY).slice(0,8) + '...') : '<empty>');
+                    console.log('HUGGING_FACE_MODEL:', HUGGING_FACE_MODEL);
+                    const modelToUse = (HUGGING_FACE_MODEL && String(HUGGING_FACE_MODEL).length > 0)
+                        ? String(HUGGING_FACE_MODEL)
+                        : 'Salesforce/blip-image-captioning-base';
+                    console.log('Using HF model:', modelToUse);
+                    const client = new HuggingFaceClient(HUGGING_FACE_KEY, modelToUse);
+                    analyzer = new ImageAnalyzer(client);
+                    console.log('Using HuggingFaceClient for image analysis');
+                } catch (err) {
+                    console.warn('HuggingFaceClient construction failed, using default analyzer:', err);
+                    analyzer = new ImageAnalyzer();
+                }
+            }
+
+            // Convert images and analyze them in parallel
+            const analyzedImages = await Promise.all(
+                imgs.map(async (image: ImageBuilder) => {
+                    try {
+                        let dataUri = image.uri;
+                        if (image.uri.startsWith('file://')) {
+                            const fileContent = await FileSystem.readAsStringAsync(
+                                image.uri,
+                                { encoding: FileSystem.EncodingType.Base64 }
+                            );
+                            dataUri = `data:image/jpeg;base64,${fileContent}`;
+                        }
+
+                        const description = await analyzer!.analyzeImage(
+                            { url: dataUri },
+                            'Generate a concise, descriptive caption for this image in one sentence.',
+                            { originalUri: image.uri }
+                        );
+                        console.log('AI description for', image.id, ':', description);
+
+                        return {
+                            ...image,
+                            description,
+                        };
+                    } catch (err) {
+                        console.error('Error analyzing image:', err);
+                        return {
+                            ...image,
+                            description: 'Unable to generate description',
+                        };
+                    }
+                })
+            );
+
+            // Store analyzed images globally for confirm screen (include descriptions)
+            globalImages = analyzedImages;
+
+            // Navigate to confirm with analyzed images
+            router.push({
+                pathname: '/confirm' as any,
+                params: { images: JSON.stringify(analyzedImages) },
+            });
+        } finally {
+            setIsAnalyzing(false);
+        }
+    }
+
     return (
         <View style={{flex: 1}}>
             <ScrollView stickyHeaderIndices={[0]} style={{ flex: 1, flexGrow: 2, backgroundColor: Colors.default.background}}>
@@ -138,14 +234,25 @@ export default function InputScreen() {
                 </ThemedView>
 
                 <ThemedView color='accent'>
-                    <ThemedButton onPress={() => {globalImages = images; router.navigate({pathname: '/confirm', params: { images: images.map(ib => JSON.stringify(ib)) } })}}>
+                    <ThemedButton onPress={() => analyzeAndContinue(images)}>
                         <ThemedText>Continue</ThemedText>
                         <IconSymbol name='arrow.right'></IconSymbol>
                     </ThemedButton>
                 </ThemedView>
             </ThemedView>
+
+            {/* Loading overlay while analyzing images */}
+            <Modal transparent animationType="fade" visible={isAnalyzing}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.7)' }}>
+                    <ThemedView color='background' style={{ padding: 20, borderRadius: 10, gap: 10, alignItems: 'center' }}>
+                        <ActivityIndicator size="large" color={Colors.default.text} />
+                        <ThemedText>Analyzing images...</ThemedText>
+                    </ThemedView>
+                </View>
+            </Modal>
         </View>
-    )
+    );
+
 }
 
 const styles = StyleSheet.create({

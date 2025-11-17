@@ -1,15 +1,15 @@
+import { currentUsername } from "@/app/index";
+import { globalImages } from "@/app/input";
 import { ThemedView } from '@/components/themed-view';
 import { Header } from '@/components/ui/header';
 import { ImageBoxConfirm } from '@/components/ui/image-box-confirm';
-import { ScrollView} from 'react-native';
-import { Fragment, useEffect, useState} from "react";
-import { useRouter} from "expo-router";
-import { globalImages } from "@/app/input";
-import { upload, UploadApiOptions} from 'cloudinary-react-native';
-import { Cloudinary } from '@cloudinary/url-gen';
 import { Colors } from "@/constants/theme";
-import { currentUsername } from "@/app/index";
 import { storeImage } from "@/functionality/data-storage";
+// Use the legacy FileSystem API to avoid deprecation warnings and support readAsStringAsync
+import * as FileSystem from 'expo-file-system/legacy';
+import { useRouter } from "expo-router";
+import { Fragment, useEffect, useState } from "react";
+import { ScrollView } from 'react-native';
 
 /**
  * The information necessary to show an image on the confirm screen.
@@ -28,61 +28,41 @@ export function resetAcceptedImages(): void {
 }
 
 export default function ConfirmScreen() {
-    const cloudinary = new Cloudinary({
-        cloud: {
-            cloudName: "script-cs",
-        },
-        url: {
-            secure: true
-        }
-    });
-
-    const options: UploadApiOptions = {
-        upload_preset: 'default_upload',
-        unsigned: true,
-        metadata: 'username=rahh|description=green'
-    }
+    const CLOUD_NAME = 'script-cs';
+    const UPLOAD_PRESET = 'default_upload';
 
     const uploadToCloudinary = async (uri: string, description: string) => {
-        console.log("uploading to cloudainary...");
-
-        options.metadata = 'username=' + currentUsername + '|description=' + description;
-
-        await upload(cloudinary, {
-            file: uri,
-            options: options,
-            callback: (error: any, response: any) => {
-                console.log("error: " + error);
-                console.log("response: " + response);
-                console.log("response stringify " + JSON.stringify(response))
-                console.log("response PUBLIC ID: " + response.public_id)
-                storeImage(currentUsername, response.public_id, description, response.width, response.height);
-
-                /* the response:
-                "asset_id":"d43b1cdd929839490ed83ef4d77b6e11",
-                "public_id":"yzx9ixx3cwwwwjb0mr2t",
-                "version":1763329669,
-                "version_id":"b2202cc1c90fe288bd6513aa6db49cdc",
-                "signature":"4d680c8086d7385801cd172f983fb334db8e9aa1",
-                "width":640,
-                "height":1136
-                ,"format":"png",
-                "resource_type":"image",
-                "created_at":"2025-11-16T21:47:49Z","tags":[],
-                "bytes":65593,"type":"upload",
-                "etag":"d2bc8e7384e4db354ffeb7b078796531",
-                "placeholder":false,
-                "url":"http://res.cloudinary.com/script-cs/image/upload/v1763329669/yzx9ixx3cwwwwjb0mr2t.png",
-                "secure_url":"https://res.cloudinary.com/script-cs/image/upload/v1763329669/yzx9ixx3cwwwwjb0mr2t.png",
-                "asset_folder":"",
-                "display_name":"file",
-                "metadata":{"description":"Insert image description here","username":"A"},
-                "original_filename":"file"}
-                 */
+        console.log('uploading to cloudinary (direct unsigned REST API)...');
+        try {
+            // prepare file as data URI
+            let fileDataUri = uri;
+            if (uri.startsWith('file://')) {
+                const b64 = await FileSystem.readAsStringAsync(uri, { encoding: FileSystem.EncodingType.Base64 });
+                // assume jpeg if not specified; Cloudinary can detect format
+                fileDataUri = `data:image/jpeg;base64,${b64}`;
             }
-        })
 
-        console.log('done uploading!');
+            const fd: any = new FormData();
+            fd.append('file', fileDataUri);
+            fd.append('upload_preset', UPLOAD_PRESET);
+            // attach simple context metadata
+            fd.append('context', `username=${currentUsername}|description=${description}`);
+
+            const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`, {
+                method: 'POST',
+                body: fd,
+            });
+            const json = await res.json();
+            console.log('cloudinary upload response:', json);
+            if (json.error) {
+                console.error('Cloudinary upload error:', json.error);
+                return;
+            }
+            // store result in local DB
+            storeImage(currentUsername, json.public_id, description, json.width, json.height);
+        } catch (err) {
+            console.error('uploadToCloudinary failed:', err);
+        }
     }
 
     const router = useRouter();
@@ -99,22 +79,29 @@ export default function ConfirmScreen() {
      *
      */
     useEffect(() => {
-        const converted: ImageCBuilder[] = [];
+        (async () => {
+            // If no images, navigate back as before
+            if (globalImages.length === 0) {
+                router.back();
+                router.replace('/results' as any);
+                return;
+            }
 
-        globalImages.forEach(i => converted.push({
-            uri: i.uri,
-            id: i.id,
-            width: i.width,
-            height: i.height,
-            description: 'Insert image description here'})); // TODO call ai
+            // Images now have pre-populated descriptions from input.tsx
+            // Convert to ImageCBuilder format for display
+            const converted: ImageCBuilder[] = globalImages.map(i => ({
+                uri: i.uri,
+                id: i.id,
+                width: i.width,
+                height: i.height,
+                description: i.description ?? 'No description'
+            }));
 
-        console.log(converted);
-        setImages(converted);
+            console.log(converted);
+            setImages(converted);
+        })();
 
-        if (converted.length === 0) {
-            router.back();
-            router.replace('/results')
-        }
+        // converted is scoped inside the async IIFE above; early navigation is handled there.
     }, [setImages]);
 
     const handleAccept = (id: number, updatedDescription: string) => {
@@ -140,7 +127,7 @@ export default function ConfirmScreen() {
         setImages(newImages);
         if (newImages.length === 0) { // images is not updated at this time (state updating called as queue), must use newImages
             router.back();
-            router.replace('/results');
+            router.replace('/results' as unknown as any);
         }
     }
 
